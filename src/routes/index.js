@@ -1,20 +1,26 @@
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import { StyleSheet } from 'react-native';
 
-import Home from '../pages/home';
-import Login from '../pages/login';
+import CreateAccount from '../pages/create-account/CreateAccount';
+import Home from '../pages/home/Home';
+import Login from '../pages/login/Login';
 
-const Stack = createNativeStackNavigator();
+const Drawer = createDrawerNavigator();
 
 export default function Routes() {
   return (
-    <Stack.Navigator>
-      <Stack.Screen
+    <Drawer.Navigator>
+      <Drawer.Screen
         name="Login"
         component={Login}
         options={{headerShown: false}}
       />
-      <Stack.Screen
+      <Drawer.Screen
+        name="CreateAccount"
+        component={CreateAccount}
+        options={{headerShown: false}}
+      />
+      <Drawer.Screen
         name="Home"
         component={Home}
         options={{
@@ -24,7 +30,7 @@ export default function Routes() {
           headerTitleStyle: styles.headerTitleStyle,
         }}
       />
-    </Stack.Navigator>
+    </Drawer.Navigator>
   );
 }
 
