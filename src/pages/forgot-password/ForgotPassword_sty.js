@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Averia Libre',
     fontSize: 38,
     paddingVertical: 100,
-    paddingTop: 150,
+    paddingTop: 280,
     position: 'relative',
     display: 'flex',
     justifyContent: 'space-around',
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20
   },
   labelBox: {
-    width: '35%',
+    width: '15%',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'flex-end',
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   inputBox: {
-    width: '65%',
+    width: '85%',
   },
   input: {
     height: 41,

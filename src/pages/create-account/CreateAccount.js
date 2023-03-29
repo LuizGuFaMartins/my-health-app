@@ -39,7 +39,7 @@ const CreateAccount = ({navigation}) => {
       <View style={styles.header}>
         <Image
           style={styles.vaccineIcon}
-          source={require('../../assets/icon-vaccine.jpg')}
+          source={require('../../assets/images/icon-vaccine.jpg')}
         />
         <Text style={styles.titleHeader}>MyHealth</Text>
       </View>

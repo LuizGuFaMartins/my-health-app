@@ -3,13 +3,12 @@ import {
   Button,
   Image,
   ImageBackground,
-  StyleSheet,
   Text,
   TextInput,
   View,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import { styles } from './Login_sty';
+import {styles} from './Login_sty';
 
 const Login = ({navigation}) => {
   const [email, onChangeEmail] = React.useState('');
@@ -19,9 +18,9 @@ const Login = ({navigation}) => {
   const [passwordError, onChangePasswordError] = React.useState('');
 
   function signIn() {
-    if(validateFields()){
-      console.log("valido")
-      navigation.navigate('Home', {name: 'Luiz'})
+    if (validateFields()) {
+      console.log('valido');
+      navigation.navigate('Home', {name: 'Luiz'});
     }
   }
 
@@ -29,7 +28,9 @@ const Login = ({navigation}) => {
     navigation.navigate('CreateAccount', {name: 'Luiz'});
   }
 
-  function forgotPassword() {}
+  function forgotPassword() {
+    navigation.navigate('ForgotPassword', {name: 'Luiz'});
+  }
 
   function validateFields() {
     onChangeEmailError('');
@@ -53,7 +54,7 @@ const Login = ({navigation}) => {
 
   return (
     <ImageBackground
-      source={require('../../assets/initial-background.jpeg')}
+      source={require('../../assets/images/initial-background.jpeg')}
       resizeMode="cover"
       style={styles.container}>
       <LinearGradient
@@ -64,7 +65,7 @@ const Login = ({navigation}) => {
         <View style={styles.titleContainer}>
           <Image
             style={styles.vaccineIcon}
-            source={require('../../assets/icon-vaccine.jpg')}
+            source={require('../../assets/images/icon-vaccine.jpg')}
           />
           <Text style={styles.title}>MyHealth</Text>
         </View>

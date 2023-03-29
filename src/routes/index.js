@@ -2,6 +2,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import { StyleSheet } from 'react-native';
 
 import CreateAccount from '../pages/create-account/CreateAccount';
+import ForgotPassword from '../pages/forgot-password/ForgotPassword';
 import Home from '../pages/home/Home';
 import Login from '../pages/login/Login';
 
@@ -18,6 +19,11 @@ export default function Routes() {
       <Drawer.Screen
         name="CreateAccount"
         component={CreateAccount}
+        options={{headerShown: false}}
+      />
+      <Drawer.Screen
+        name="ForgotPassword"
+        component={ForgotPassword}
         options={{headerShown: false}}
       />
       <Drawer.Screen
