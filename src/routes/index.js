@@ -5,6 +5,7 @@ import CreateAccount from '../pages/create-account/CreateAccount';
 import ForgotPassword from '../pages/forgot-password/ForgotPassword';
 import Home from '../pages/home/Home';
 import Login from '../pages/login/Login';
+import CreateVaccine from '../pages/create-vaccine/CreateVaccine';
 
 const Drawer = createDrawerNavigator();
 
@@ -29,6 +30,16 @@ export default function Routes() {
       <Drawer.Screen
         name="Home"
         component={Home}
+        options={{
+          title: 'Minhas Vacinas',
+          headerStyle: styles.headerStyle,
+          headerTintColor: styles.headerTintColor,
+          headerTitleStyle: styles.headerTitleStyle,
+        }}
+      />
+      <Drawer.Screen
+        name="CreateVaccine"
+        component={CreateVaccine}
         options={{
           title: 'Minhas Vacinas',
           headerStyle: styles.headerStyle,
