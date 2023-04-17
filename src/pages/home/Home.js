@@ -2,6 +2,7 @@ import React from 'react';
 import {Button, Image, Text, TouchableOpacity, View} from 'react-native';
 import {ScrollView, TextInput} from 'react-native-gesture-handler';
 import {styles} from './Home_sty';
+import Card from '../../components/card/Card';
 
 const Home = ({navigation}) => {
   const [search, onChangeSearch] = React.useState('');
@@ -10,12 +11,12 @@ const Home = ({navigation}) => {
     navigation.navigate('Login', {});
   }
 
-  function goToCreatePage(){
-    navigation.navigate('CreateVaccine', {})
+  function goToCreatePage() {
+    navigation.navigate('Nova vacina', {});
   }
 
   return (
-    <ScrollView style={styles.container}>
+    <View style={styles.container}>
       <View style={styles.inputSection}>
         <View style={styles.inputBox}>
           <View style={styles.searchIconBox}>
@@ -33,28 +34,34 @@ const Home = ({navigation}) => {
           />
         </View>
       </View>
-
-      <View style={styles.cardsContainer}>
-        <TouchableOpacity onPress={goToEditPage} style={styles.card}>
-          <View style={styles.titleDate}>
-            <Text style={styles.titleDate.title}>BCG</Text>
-            <Text style={styles.titleDate.dose}>Dose única</Text>
-            <Text style={styles.titleDate.date}>11/06/2022</Text>
-          </View>
-          <View style={styles.imageCardBox}></View>
-          <Text style={styles.nextText}>Não há próxima dose</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={goToEditPage} style={styles.card}>
-          <View style={styles.titleDate}>
-            <Text style={styles.titleDate.title}>BCG</Text>
-            <Text style={styles.titleDate.dose}>Dose única</Text>
-            <Text style={styles.titleDate.date}>11/06/2022</Text>
-          </View>
-          <View style={styles.imageCardBox}></View>
-          <Text style={styles.nextText}>Não há próxima dose</Text>
-        </TouchableOpacity>
-      </View>
-
+      <ScrollView>
+        <View style={styles.cardsContainer}>
+          <Card></Card>
+          {/* <TouchableOpacity onPress={goToEditPage} style={styles.card}>
+            <View style={styles.titleDate}>
+              <Text style={styles.titleDate.title}>BCG</Text>
+              <Text style={styles.titleDate.dose}>Dose única</Text>
+              <Text style={styles.titleDate.date}>11/06/2022</Text>
+            </View>
+            <View style={styles.imageCardBox}>
+              <Image
+                style={styles.vaccineIcon}
+                source={require('../../assets/images/icon-vaccine.jpg')}
+              />
+            </View>
+            <Text style={styles.nextText}>Não há próxima dose</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={goToEditPage} style={styles.card}>
+            <View style={styles.titleDate}>
+              <Text style={styles.titleDate.title}>BCG</Text>
+              <Text style={styles.titleDate.dose}>Dose única</Text>
+              <Text style={styles.titleDate.date}>11/06/2022</Text>
+            </View>
+            <View style={styles.imageCardBox}></View>
+            <Text style={styles.nextText}>Não há próxima dose</Text>
+          </TouchableOpacity>           */}
+        </View>
+      </ScrollView>
       <View style={styles.footerButton}>
         <View style={styles.buttonBox}>
           <Button
@@ -66,7 +73,7 @@ const Home = ({navigation}) => {
           />
         </View>
       </View>
-    </ScrollView>
+    </View>
   );
 };
 

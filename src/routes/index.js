@@ -1,32 +1,18 @@
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import { StyleSheet } from 'react-native';
+import {createDrawerNavigator} from '@react-navigation/drawer';
+import {StyleSheet} from 'react-native';
 
 import CreateAccount from '../pages/create-account/CreateAccount';
 import ForgotPassword from '../pages/forgot-password/ForgotPassword';
 import Home from '../pages/home/Home';
 import Login from '../pages/login/Login';
 import CreateVaccine from '../pages/create-vaccine/CreateVaccine';
+import DrawerComponent from '../components/drawer/DrawerComponent';
 
 const Drawer = createDrawerNavigator();
 
 export default function Routes() {
   return (
-    <Drawer.Navigator>
-      <Drawer.Screen
-        name="Login"
-        component={Login}
-        options={{headerShown: false}}
-      />
-      <Drawer.Screen
-        name="CreateAccount"
-        component={CreateAccount}
-        options={{headerShown: false}}
-      />
-      <Drawer.Screen
-        name="ForgotPassword"
-        component={ForgotPassword}
-        options={{headerShown: false}}
-      />
+    <Drawer.Navigator drawerContent={props => <DrawerComponent {...props} />}>
       <Drawer.Screen
         name="Home"
         component={Home}
@@ -38,13 +24,41 @@ export default function Routes() {
         }}
       />
       <Drawer.Screen
-        name="CreateVaccine"
+        name="Login"
+        component={Login}
+        options={{headerShown: false, title: 'Sair'}}
+      />
+      <Drawer.Screen
+        name="CreateAccount"
+        component={CreateAccount}
+        options={{
+          headerShown: false,
+          drawerLabel: () => null,
+          title: undefined,
+          drawerIcon: () => null,
+        }}
+      />
+      <Drawer.Screen
+        name="ForgotPassword"
+        component={ForgotPassword}
+        options={{
+          headerShown: false,
+          drawerLabel: () => null,
+          title: undefined,
+          drawerIcon: () => null,
+        }}
+      />
+      <Drawer.Screen
+        name="Nova vacina"
         component={CreateVaccine}
         options={{
-          title: 'Minhas Vacinas',
+          title: 'Nova vacina',
           headerStyle: styles.headerStyle,
           headerTintColor: styles.headerTintColor,
           headerTitleStyle: styles.headerTitleStyle,
+          drawerLabel: () => null,
+          title: undefined,
+          drawerIcon: () => null,
         }}
       />
     </Drawer.Navigator>

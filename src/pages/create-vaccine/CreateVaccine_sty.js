@@ -7,27 +7,10 @@ const styles = StyleSheet.create({
     fontFamily: 'Averia Libre',
     fontSize: 38,
     paddingVertical: 100,
-    paddingTop: 150,
     position: 'relative',
     display: 'flex',
     justifyContent: 'space-around',
-  },
-  header: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    width: '100%',
-    backgroundColor: '#C1E7E3',
-    display: 'flex',
-    flexDirection: 'row',
-    padding: 10,
-    alignItems: 'center',
-  },
-  titleHeader: {
-    fontFamily: 'Averia Libre',
-    fontSize: 38,
-    color: '#419ED7',
-  },
+  }, 
   inputContainer: {
     display: 'flex',
     flexDirection: 'column',
@@ -42,7 +25,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20
   },
   labelBox: {
-    width: '35%',
+    width: '40%',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'flex-end',
@@ -52,7 +35,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   inputBox: {
-    width: '65%',
+    width: '60%',
   },
   input: {
     height: 41,

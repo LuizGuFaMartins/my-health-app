@@ -4,8 +4,11 @@ import {TextInput} from 'react-native-gesture-handler';
 import {styles} from './CreateVaccine_sty';
 
 const CreateVaccine = ({navigation}) => {
-  const [email, onChangeEmail] = React.useState('');
-  const [password, onChangePassword] = React.useState('');
+  const [vaccineDate, onChangeVaccineDate] = React.useState('');
+  const [vaccine, onChangeVaccine] = React.useState('');
+  const [dose, onChangeDose] = React.useState('');
+  const [proof, onChangeProof] = React.useState('');
+  const [nextVaccine, onChangeNextVaccine] = React.useState('');
 
   const [emailError, onChangeEmailError] = React.useState('');
   const [passwordError, onChangePasswordError] = React.useState('');
@@ -36,25 +39,17 @@ const CreateVaccine = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <Image
-          style={styles.vaccineIcon}
-          source={require('../../assets/images/icon-vaccine.jpg')}
-        />
-        <Text style={styles.titleHeader}>MyHealth</Text>
-      </View>
-
       <View styles={styles.inputContainer}>
         <View style={styles.inputSection}>
           <View style={styles.labelBox}>
-            <Text style={styles.label}>Nome completo</Text>
+            <Text style={styles.label}>Data de vacinação</Text>
           </View>
           <View style={styles.inputBox}>
             <TextInput
               style={styles.input}
-              onChangeText={onChangeEmail}
-              value={email}
-              placeholder="Digite seu nome completo"
+              onChangeText={onChangeVaccineDate}
+              value={vaccineDate}
+              placeholder="Data de vacinação"
               placeholderTextColor="#419ED7"
             />
           </View>
@@ -65,14 +60,14 @@ const CreateVaccine = ({navigation}) => {
 
         <View style={styles.inputSection}>
           <View style={styles.labelBox}>
-            <Text style={styles.label}>Data nascimento</Text>
+            <Text style={styles.label}>Vacina</Text>
           </View>
           <View style={styles.inputBox}>
             <TextInput
               style={styles.input}
-              onChangeText={onChangeEmail}
-              value={email}
-              placeholder="Digite sua data de nascimento"
+              onChangeText={onChangeVaccine}
+              value={vaccine}
+              placeholder="Vacina"
               placeholderTextColor="#419ED7"
             />
           </View>
@@ -83,13 +78,13 @@ const CreateVaccine = ({navigation}) => {
 
         <View style={styles.inputSection}>
           <View style={styles.labelBox}>
-            <Text style={styles.label}>E-mail</Text>
+            <Text style={styles.label}>Dose</Text>
           </View>
           <View style={styles.inputBox}>
             <TextInput
               style={styles.input}
-              onChangeText={onChangeEmail}
-              value={email}
+              onChangeText={onChangeDose}
+              value={dose}
               placeholder="Digite seu e-mail"
               placeholderTextColor="#419ED7"
             />
@@ -101,14 +96,14 @@ const CreateVaccine = ({navigation}) => {
 
         <View style={styles.inputSection}>
           <View style={styles.labelBox}>
-            <Text style={styles.label}>Senha</Text>
+            <Text style={styles.label}>Comprovante</Text>
           </View>
           <View style={styles.inputBox}>
             <TextInput
               style={styles.input}
-              onChangeText={onChangeEmail}
-              value={email}
-              placeholder="Digite sua senha"
+              onChangeText={onChangeProof}
+              value={proof}
+              placeholder=""
               placeholderTextColor="#419ED7"
             />
           </View>
@@ -119,14 +114,14 @@ const CreateVaccine = ({navigation}) => {
 
         <View style={styles.inputSection}>
           <View style={styles.labelBox}>
-            <Text style={styles.label}>Repetir senha</Text>
+            <Text style={styles.label}>Próxima vacinação</Text>
           </View>
           <View style={styles.inputBox}>
             <TextInput
               style={styles.input}
-              onChangeText={onChangeEmail}
-              value={email}
-              placeholder="Digite novamente sua senha"
+              onChangeText={onChangeNextVaccine}
+              value={nextVaccine}
+              placeholder=""
               placeholderTextColor="#419ED7"
             />
           </View>
@@ -134,7 +129,7 @@ const CreateVaccine = ({navigation}) => {
             <Text style={styles.error}>{emailError}</Text>
           )}
         </View>
-      </View>  
+      </View>
 
       <View style={styles.buttonContainer}>
         <View style={styles.buttonBox}>
@@ -145,9 +140,8 @@ const CreateVaccine = ({navigation}) => {
             accessibilityLabel="Learn more about this purple button"
             style={styles.button}
           />
-        </View>        
-      </View>  
-
+        </View>
+      </View>
 
       {/* <View style={styles.inputContainer}>
         <View style={styles.inputBox}>
