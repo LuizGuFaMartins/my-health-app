@@ -20,7 +20,7 @@ const Login = ({navigation}) => {
   function signIn() {
     if (validateFields()) {
       console.log('valido');
-      navigation.navigate('Home', {name: 'Luiz'});
+      navigation.navigate('Main', {name: 'Luiz'});
     }
   }
 

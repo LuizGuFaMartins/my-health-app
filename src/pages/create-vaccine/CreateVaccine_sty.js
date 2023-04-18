@@ -6,11 +6,27 @@ const styles = StyleSheet.create({
     backgroundColor: '#ADD4D0',
     fontFamily: 'Averia Libre',
     fontSize: 38,
-    paddingVertical: 100,
     position: 'relative',
     display: 'flex',
-    justifyContent: 'space-around',
-  }, 
+    paddingTop: 40,
+    paddingBottom: 100,
+  },
+  header: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    backgroundColor: '#C1E7E3',
+    display: 'flex',
+    flexDirection: 'row',
+    padding: 10,
+    alignItems: 'center',
+  },
+  titleHeader: {
+    fontFamily: 'Averia Libre',
+    fontSize: 38,
+    color: '#419ED7',
+  },
   inputContainer: {
     display: 'flex',
     flexDirection: 'column',
@@ -25,7 +41,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20
   },
   labelBox: {
-    width: '40%',
+    width: '35%',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'flex-end',
@@ -35,7 +51,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   inputBox: {
-    width: '60%',
+    width: '65%',
   },
   input: {
     height: 41,
@@ -44,18 +60,20 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   buttonContainer: {
+    width: '100%',
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
+    position: 'absolute',
+    bottom: 0,
+    paddingBottom: 30
   },
   buttonBox: {
     width: '40%',
     fontSize: 18,
-    marginVertical: 20,
   },
   button: {
     width: '100%',
-    height: 70,
     backgroundColor: 'red',
   },
 });

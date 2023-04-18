@@ -1,8 +1,8 @@
 import React from 'react';
-import {Button, Image, Text, TouchableOpacity, View} from 'react-native';
-import {ScrollView, TextInput} from 'react-native-gesture-handler';
-import {styles} from './Home_sty';
+import { Button, Image, View } from 'react-native';
+import { ScrollView, TextInput } from 'react-native-gesture-handler';
 import Card from '../../components/card/Card';
+import { styles } from './Home_sty';
 
 const Home = ({navigation}) => {
   const [search, onChangeSearch] = React.useState('');
@@ -36,30 +36,13 @@ const Home = ({navigation}) => {
       </View>
       <ScrollView>
         <View style={styles.cardsContainer}>
-          <Card></Card>
-          {/* <TouchableOpacity onPress={goToEditPage} style={styles.card}>
-            <View style={styles.titleDate}>
-              <Text style={styles.titleDate.title}>BCG</Text>
-              <Text style={styles.titleDate.dose}>Dose única</Text>
-              <Text style={styles.titleDate.date}>11/06/2022</Text>
-            </View>
-            <View style={styles.imageCardBox}>
-              <Image
-                style={styles.vaccineIcon}
-                source={require('../../assets/images/icon-vaccine.jpg')}
-              />
-            </View>
-            <Text style={styles.nextText}>Não há próxima dose</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={goToEditPage} style={styles.card}>
-            <View style={styles.titleDate}>
-              <Text style={styles.titleDate.title}>BCG</Text>
-              <Text style={styles.titleDate.dose}>Dose única</Text>
-              <Text style={styles.titleDate.date}>11/06/2022</Text>
-            </View>
-            <View style={styles.imageCardBox}></View>
-            <Text style={styles.nextText}>Não há próxima dose</Text>
-          </TouchableOpacity>           */}
+          <Card
+            title={'BGC'}
+            dose={'1º Dose'}
+            date={'10/04/2020'}
+            nextDate={'10/04/2023'}
+            img={require('../../assets/images/icon-vaccine.jpg')}
+            onCardPress={() => goToEditPage()}></Card>
         </View>
       </ScrollView>
       <View style={styles.footerButton}>

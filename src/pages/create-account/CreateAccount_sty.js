@@ -6,11 +6,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#ADD4D0',
     fontFamily: 'Averia Libre',
     fontSize: 38,
-    paddingVertical: 100,
-    paddingTop: 150,
     position: 'relative',
     display: 'flex',
-    justifyContent: 'space-around',
+    paddingTop: 100,
+    paddingBottom: 100,
   },
   header: {
     position: 'absolute',
@@ -61,18 +60,20 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   buttonContainer: {
+    width: '100%',
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
+    position: 'absolute',
+    bottom: 0,
+    paddingBottom: 30
   },
   buttonBox: {
     width: '40%',
     fontSize: 18,
-    marginVertical: 20,
   },
   button: {
     width: '100%',
-    height: 70,
     backgroundColor: 'red',
   },
 });

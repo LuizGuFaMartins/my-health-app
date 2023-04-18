@@ -24,31 +24,6 @@ export default function Routes() {
         }}
       />
       <Drawer.Screen
-        name="Login"
-        component={Login}
-        options={{headerShown: false, title: 'Sair'}}
-      />
-      <Drawer.Screen
-        name="CreateAccount"
-        component={CreateAccount}
-        options={{
-          headerShown: false,
-          drawerLabel: () => null,
-          title: undefined,
-          drawerIcon: () => null,
-        }}
-      />
-      <Drawer.Screen
-        name="ForgotPassword"
-        component={ForgotPassword}
-        options={{
-          headerShown: false,
-          drawerLabel: () => null,
-          title: undefined,
-          drawerIcon: () => null,
-        }}
-      />
-      <Drawer.Screen
         name="Nova vacina"
         component={CreateVaccine}
         options={{

@@ -1,11 +1,11 @@
-import {NavigationContainer} from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import React from 'react';
-import Routes from './src/routes';
+import StackRoutes from './src/routes/stack';
 
 const App = () => {
   return (
     <NavigationContainer>
-      <Routes />
+      <StackRoutes />
     </NavigationContainer>
   );
 };

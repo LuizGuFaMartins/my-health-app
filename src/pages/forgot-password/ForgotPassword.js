@@ -1,6 +1,6 @@
 import React from 'react';
 import {Button, Image, Text, View} from 'react-native';
-import {TextInput} from 'react-native-gesture-handler';
+import {TextInput} from 'react-native-paper';
 import {styles} from './ForgotPassword_sty';
 
 const ForgotPassword = ({navigation}) => {
