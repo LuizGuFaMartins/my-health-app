@@ -3,10 +3,12 @@ import { Button, Image, View } from 'react-native';
 import { ScrollView, TextInput } from 'react-native-gesture-handler';
 import Card from '../../components/card/Card';
 import { styles } from './Home_sty';
+import { useNavigation } from '@react-navigation/native';
 
 const Home = ({navigation}) => {
   const [search, onChangeSearch] = React.useState('');
-
+  const nav = useNavigation();
+   
   function goToEditPage() {
     navigation.navigate('Login', {});
   }

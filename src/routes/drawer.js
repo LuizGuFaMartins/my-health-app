@@ -1,12 +1,10 @@
-import {createDrawerNavigator} from '@react-navigation/drawer';
-import {StyleSheet} from 'react-native';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { StyleSheet } from 'react-native';
 
-import CreateAccount from '../pages/create-account/CreateAccount';
-import ForgotPassword from '../pages/forgot-password/ForgotPassword';
-import Home from '../pages/home/Home';
-import Login from '../pages/login/Login';
-import CreateVaccine from '../pages/create-vaccine/CreateVaccine';
 import DrawerComponent from '../components/drawer/DrawerComponent';
+import CreateVaccine from '../pages/create-vaccine/CreateVaccine';
+import Home from '../pages/home/Home';
+import NextVaccine from '../pages/nextVaccine/NextVaccine';
 
 const Drawer = createDrawerNavigator();
 
@@ -18,6 +16,16 @@ export default function Routes() {
         component={Home}
         options={{
           title: 'Minhas Vacinas',
+          headerStyle: styles.headerStyle,
+          headerTintColor: styles.headerTintColor,
+          headerTitleStyle: styles.headerTitleStyle,
+        }}
+      />
+      <Drawer.Screen
+        name="NextVaccine"
+        component={NextVaccine}
+        options={{
+          title: 'Próximas vacinas',
           headerStyle: styles.headerStyle,
           headerTintColor: styles.headerTintColor,
           headerTitleStyle: styles.headerTitleStyle,

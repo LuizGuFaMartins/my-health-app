@@ -38,10 +38,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     flexDirection: 'row',
     padding: 10,
-    paddingHorizontal: 20
+    paddingHorizontal: 20,
+  },
+  inputSectionUpload: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'flex-start',
+    flexDirection: 'row',
+    padding: 10,
+    paddingHorizontal: 20,
   },
   labelBox: {
-    width: '35%',
+    width: '38%',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'flex-end',
@@ -53,11 +61,37 @@ const styles = StyleSheet.create({
   inputBox: {
     width: '65%',
   },
+  inputBoxDate: {
+    width: '65%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
+  inputBoxUpload: {
+    width: '65%',
+    display: 'flex',
+  },
   input: {
     height: 41,
     backgroundColor: 'white',
     color: '#419ED7',
     paddingHorizontal: 10,
+  },
+  inputDate: {
+    width: 150,
+    height: 41,
+    backgroundColor: 'white',
+    color: '#419ED7',
+    paddingHorizontal: 10,
+  },
+  dateBox: {
+    backgroundColor: 'red',
+    marginHorizontal: 5
+  },
+  inputDateButton: {
+    width: 50,
+    height: 41,
   },
   buttonContainer: {
     width: '100%',
@@ -66,7 +100,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     position: 'absolute',
     bottom: 0,
-    paddingBottom: 30
+    paddingBottom: 30,
   },
   buttonBox: {
     width: '40%',
@@ -76,6 +110,12 @@ const styles = StyleSheet.create({
     width: '100%',
     backgroundColor: 'red',
   },
+  imgBox: {
+    width: 208,
+    height: 100,
+    marginVertical: 5,
+    backgroundColor: 'green'
+  }
 });
 
 export {styles};
