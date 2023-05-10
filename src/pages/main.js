@@ -1,13 +1,9 @@
-import { NavigationContainer } from '@react-navigation/native';
+import {NavigationContainer} from '@react-navigation/native';
 import React from 'react';
-import DrawerRoutes from '../routes/drawer'
+import DrawerRoutes from '../routes/drawer';
 
 const Main = ({navigation}) => {
-  return (
-    <NavigationContainer independent={true}>
-      <DrawerRoutes />
-    </NavigationContainer>
-  );
+  return <DrawerRoutes />;
 };
 
 export default Main;

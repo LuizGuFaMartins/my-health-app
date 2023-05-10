@@ -25,6 +25,9 @@ const DrawerComponent = props => {
       <DrawerContentScrollView {...props}>
         <DrawerItemList {...props}></DrawerItemList>
       </DrawerContentScrollView>
+      {/* <Button>
+        props.navigation.popToTop();
+      </Button> */}
     </View>
   );
 };

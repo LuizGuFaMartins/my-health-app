@@ -79,15 +79,22 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   inputDate: {
-    width: 150,
+    width: 158,
     height: 41,
     backgroundColor: 'white',
     color: '#419ED7',
     paddingHorizontal: 10,
   },
   dateBox: {
-    backgroundColor: 'red',
-    marginHorizontal: 5
+    backgroundColor: 'white',
+    width: 50,
+    height: 41,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  icon: {
+    fontSize: 20,
   },
   inputDateButton: {
     width: 50,
@@ -108,14 +115,23 @@ const styles = StyleSheet.create({
   },
   button: {
     width: '100%',
-    backgroundColor: 'red',
   },
   imgBox: {
     width: 208,
     height: 100,
-    marginVertical: 5,
-    backgroundColor: 'green'
-  }
+    marginTop: 5,
+    backgroundColor: 'gray',
+  },
+  radioBox: {
+    width: 150,
+    display: 'flex',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
+  radio: {
+    color: 'white',
+  },
 });
 
 export {styles};

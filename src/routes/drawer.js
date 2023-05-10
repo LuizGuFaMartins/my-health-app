@@ -31,7 +31,7 @@ export default function Routes() {
           headerTitleStyle: styles.headerTitleStyle,
         }}
       />
-      <Drawer.Screen
+      {/* <Drawer.Screen
         name="Nova vacina"
         component={CreateVaccine}
         options={{
@@ -43,7 +43,7 @@ export default function Routes() {
           title: undefined,
           drawerIcon: () => null,
         }}
-      />
+      /> */}
     </Drawer.Navigator>
   );
 }

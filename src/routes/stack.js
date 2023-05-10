@@ -1,10 +1,11 @@
 import { createStackNavigator } from '@react-navigation/stack';
 
+import { StyleSheet } from 'react-native';
 import CreateAccount from '../pages/create-account/CreateAccount';
+import CreateVaccine from '../pages/create-vaccine/CreateVaccine';
 import ForgotPassword from '../pages/forgot-password/ForgotPassword';
 import Login from '../pages/login/Login';
 import Main from '../pages/main';
-import { StyleSheet } from 'react-native';
 
 const Stack = createStackNavigator();
 
@@ -39,16 +40,16 @@ function StackNavigator() {
         name="Main"
         component={Main}
       />
-      {/* <Stack.Screen
+      <Stack.Screen
         name="Nova vacina"
         component={CreateVaccine}
         options={{
           title: 'Nova vacina',
           headerStyle: styles.headerStyle,
           headerTintColor: styles.headerTintColor,
-          headerTitleStyle: styles.headerTitleStyle          
+          headerTitleStyle: styles.headerTitleStyle,
         }}
-      /> */}
+      />
     </Stack.Navigator>
   );
 }
