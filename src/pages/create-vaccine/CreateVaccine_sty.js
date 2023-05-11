@@ -8,8 +8,7 @@ const styles = StyleSheet.create({
     fontSize: 38,
     position: 'relative',
     display: 'flex',
-    paddingTop: 40,
-    paddingBottom: 100,
+    paddingTop: 30,
   },
   header: {
     position: 'absolute',
@@ -39,6 +38,16 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     padding: 10,
     paddingHorizontal: 20,
+    position: 'relative',
+  },
+  inputSectionRadio: {
+    height: 140,
+    display: 'flex',
+    justifyContent: 'center',
+    flexDirection: 'row',
+    padding: 10,
+    paddingHorizontal: 20,
+    position: 'relative',
   },
   inputSectionUpload: {
     display: 'flex',
@@ -124,6 +133,7 @@ const styles = StyleSheet.create({
   },
   radioBox: {
     width: 150,
+    margin: -3,
     display: 'flex',
     justifyContent: 'flex-start',
     alignItems: 'center',
@@ -131,6 +141,14 @@ const styles = StyleSheet.create({
   },
   radio: {
     color: 'white',
+    backgroundColor: '#419ED7',
+  },
+  error: {
+    position: 'absolute',
+    bottom: -6,
+    left: 140,
+    color: 'red',
+    zIndex: 99,
   },
 });
 

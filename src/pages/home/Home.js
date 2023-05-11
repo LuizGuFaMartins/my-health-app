@@ -1,21 +1,46 @@
-import { useNavigation } from '@react-navigation/native';
-import React from 'react';
-import { Button, Image, View } from 'react-native';
-import { ScrollView, TextInput } from 'react-native-gesture-handler';
+import {useNavigation} from '@react-navigation/native';
+import React, {useEffect} from 'react';
+import {Button, Image, View} from 'react-native';
+import {ScrollView, TextInput} from 'react-native-gesture-handler';
 import Card from '../../components/card/Card';
-import { styles } from './Home_sty';
+import Vaccine from '../../models/Vaccine';
+import {styles} from './Home_sty';
 
 const Home = ({navigation}) => {
   const [search, onChangeSearch] = React.useState('');
+  const [id, setId] = React.useState(0);
   const nav = useNavigation();
+  let vaccines = [];
+
+  const updateId = newId => {
+    setId(newId);
+    goToEditPage();
+  };
+
+  // useFocusEffect(
+  //   React.useCallback(() => {
+  //     console.log(Vaccine.list());
+
+  //     // loadCards();
+  //   }, []),
+  // );
+
+  useEffect(() => {
+    if (id !== 0) goToEditPage();
+  }, [id]);
+
+  function loadCards() {
+    const vaccines = Vaccine.list();
+    return vaccines.map(vac => <Card vaccine={vac} setId={setId}></Card>);
+  }
 
   function goToEditPage() {
-    navigation.navigate('Login', {});
+    console.log(id);
+    navigation.push('Nova vacina', {id: id});
   }
 
   function goToCreatePage() {
     navigation.push('Nova vacina', {});
-    // navigation.navigate('Nova vacina', {});
   }
 
   return (
@@ -38,15 +63,7 @@ const Home = ({navigation}) => {
         </View>
       </View>
       <ScrollView>
-        <View style={styles.cardsContainer}>
-          <Card
-            title={'BGC'}
-            dose={'1º Dose'}
-            date={'10/04/2020'}
-            nextDate={'10/04/2023'}
-            img={require('../../assets/images/icon-vaccine.jpg')}
-            onCardPress={() => goToEditPage()}></Card>
-        </View>
+        <View style={styles.cardsContainer}>{loadCards()}</View>
       </ScrollView>
       <View style={styles.footerButton}>
         <View style={styles.buttonBox}>
