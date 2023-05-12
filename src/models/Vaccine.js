@@ -21,7 +21,7 @@ module.exports = {
     }
   },
   list() {
-    return vaccines;
+    return vaccines.length > 0 ? vaccines : [];
   },
   getElementById(id) {
     let pos = this.getPositionById(id);

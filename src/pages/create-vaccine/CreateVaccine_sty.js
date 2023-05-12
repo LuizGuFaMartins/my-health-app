@@ -9,6 +9,7 @@ const styles = StyleSheet.create({
     position: 'relative',
     display: 'flex',
     paddingTop: 30,
+    paddingBottom: 100
   },
   header: {
     position: 'absolute',

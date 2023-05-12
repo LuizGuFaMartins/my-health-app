@@ -1,7 +1,7 @@
 import React from 'react';
-import {Image, Text, View} from 'react-native';
-import {TouchableOpacity} from 'react-native-gesture-handler';
-import {styles} from './Card_sty';
+import { Image, Text, View } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { styles } from './Card_sty';
 
 const Card = ({vaccine, setId}) => {
   function returnData() {

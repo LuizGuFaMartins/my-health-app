@@ -1,4 +1,3 @@
-import {useNavigation} from '@react-navigation/native';
 import React, {useEffect} from 'react';
 import {Button, Image, View} from 'react-native';
 import {ScrollView, TextInput} from 'react-native-gesture-handler';
@@ -15,12 +14,15 @@ const Home = ({navigation}) => {
   }, [id]);
 
   function loadCards() {
-    const vaccines = Vaccine.list();
-    return vaccines.map(vac => <Card vaccine={vac} setId={setId}></Card>);
+    if (Vaccine.list().length > 0) {
+      return Vaccine.list().map(vac => (
+        <Card vaccine={vac} setId={setId}></Card>
+      ));
+    }
   }
 
   function goToEditPage() {
-    navigation.push('Nova vacina', {id: id});
+    navigation.push('Editar vacina', {id: id});
   }
 
   function goToCreatePage() {

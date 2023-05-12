@@ -1,14 +1,26 @@
-import React from 'react';
-import { Button, View } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
+import React, {useEffect} from 'react';
+import {Button, View} from 'react-native';
+import {ScrollView} from 'react-native-gesture-handler';
 import SimpleCard from '../../components/simple-card /SimpleCard';
-import { styles } from './NextVaccine_sty';
+import Vaccine from '../../models/Vaccine';
+import {styles} from './NextVaccine_sty';
 
 const NextVaccine = ({navigation}) => {
   const [search, onChangeSearch] = React.useState('');
+  const [id, setId] = React.useState(0);
+
+  useEffect(() => {
+    if (id !== 0) goToEditPage();
+  }, [id]);
+
+  function loadCards() {
+    return Vaccine.list().map(vac => (
+      <SimpleCard vaccine={vac} setId={setId}></SimpleCard>
+    ));
+  }
 
   function goToEditPage() {
-    navigation.navigate('Login', {});
+    navigation.push('Editar vacina', {id: id});
   }
 
   function goToCreatePage() {
@@ -18,12 +30,7 @@ const NextVaccine = ({navigation}) => {
   return (
     <View style={styles.container}>
       <ScrollView>
-        <View style={styles.cardsContainer}>
-          <SimpleCard
-            title={'BGC'}
-            nextDate={'10/04/2023'}
-            onCardPress={() => goToEditPage()}></SimpleCard>
-        </View>
+        <View style={styles.cardsContainer}>{loadCards()}</View>
       </ScrollView>
       <View style={styles.footerButton}>
         <View style={styles.buttonBox}>

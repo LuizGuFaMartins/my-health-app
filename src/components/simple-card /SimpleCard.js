@@ -1,15 +1,17 @@
 import React from 'react';
-import { Image, Text, View } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import { styles } from './SimpleCard_sty';
+import {Text, View} from 'react-native';
+import {TouchableOpacity} from 'react-native-gesture-handler';
+import {styles} from './SimpleCard_sty';
 
-const SimpleCard = ({title, nextDate, onSimpleCardPress}) => {
+const SimpleCard = ({vaccine, setId}) => {
+  function returnData() {
+    setId(vaccine.id);
+  }
   return (
     <View style={styles.simpleCard}>
-      <TouchableOpacity onPress={() => onSimpleCardPress()}>
-          <Text style={styles.title}>{title}</Text>
-        <Text style={styles.nextDate}>{nextDate}</Text>
-       
+      <TouchableOpacity onPress={returnData}>
+        <Text style={styles.title}>{vaccine.vaccine}</Text>
+        <Text style={styles.nextDate}>{vaccine.nextDate}</Text>
       </TouchableOpacity>
     </View>
   );

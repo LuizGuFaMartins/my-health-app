@@ -105,150 +105,154 @@ const EditVaccine = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <View styles={styles.inputContainer}>
-        <View style={styles.inputSection}>
-          <View style={styles.labelBox}>
-            <Text style={styles.label}>Data de vacinação</Text>
+      <ScrollView>
+        <View styles={styles.inputContainer}>
+          <View style={styles.inputSection}>
+            <View style={styles.labelBox}>
+              <Text style={styles.label}>Data de vacinação</Text>
+            </View>
+            <View style={styles.inputBoxDate}>
+              <TextInput
+                style={styles.inputDate}
+                value={date}
+                editable={false}
+                placeholder="Data de vacinação"
+                placeholderTextColor="#419ED7"
+              />
+              <View style={styles.dateBox}>
+                <TouchableOpacity onPress={() => onChangeOpenDate(true)}>
+                  <FontAwesomeIcon
+                    style={styles.icon}
+                    color={'#419ED7'}
+                    size={28}
+                    icon={faCalendar}></FontAwesomeIcon>
+                </TouchableOpacity>
+                <DatePicker
+                  modal
+                  open={openDate}
+                  date={vaccineDate}
+                  onConfirm={value => {
+                    changeDate(value);
+                  }}
+                  onCancel={() => {
+                    onChangeOpenDate(false);
+                  }}
+                />
+              </View>
+            </View>
+            {dateError.length > 0 && (
+              <Text style={styles.error}>{dateError}</Text>
+            )}
           </View>
-          <View style={styles.inputBoxDate}>
-            <TextInput
-              style={styles.inputDate}
-              value={date}
-              placeholder="Data de vacinação"
-              placeholderTextColor="#419ED7"
-            />
-            <View style={styles.dateBox}>
-              <TouchableOpacity onPress={() => onChangeOpenDate(true)}>
-                <FontAwesomeIcon
-                  style={styles.icon}
-                  color={'#419ED7'}
-                  size={28}
-                  icon={faCalendar}></FontAwesomeIcon>
-              </TouchableOpacity>
-              <DatePicker
-                modal
-                open={openDate}
-                date={vaccineDate}
-                onConfirm={value => {
-                  changeDate(value);
-                }}
-                onCancel={() => {
-                  onChangeOpenDate(false);
-                }}
+
+          <View style={styles.inputSection}>
+            <View style={styles.labelBox}>
+              <Text style={styles.label}>Vacina</Text>
+            </View>
+            <View style={styles.inputBox}>
+              <TextInput
+                style={styles.input}
+                onChangeText={onChangeVaccine}
+                value={vaccine}
+                placeholder="Vacina"
+                placeholderTextColor="#419ED7"
               />
             </View>
+            {vaccineError.length > 0 && (
+              <Text style={styles.error}>{vaccineError}</Text>
+            )}
           </View>
-          {dateError.length > 0 && (
-            <Text style={styles.error}>{dateError}</Text>
-          )}
-        </View>
 
-        <View style={styles.inputSection}>
-          <View style={styles.labelBox}>
-            <Text style={styles.label}>Vacina</Text>
-          </View>
-          <View style={styles.inputBox}>
-            <TextInput
-              style={styles.input}
-              onChangeText={onChangeVaccine}
-              value={vaccine}
-              placeholder="Vacina"
-              placeholderTextColor="#419ED7"
-            />
-          </View>
-          {vaccineError.length > 0 && (
-            <Text style={styles.error}>{vaccineError}</Text>
-          )}
-        </View>
-
-        <View style={styles.inputSectionRadio}>
-          <View style={styles.labelBox}>
-            <Text style={styles.label}>Dose</Text>
-          </View>
-          <View style={styles.inputBox}>
-            <Provider theme={theme}>
-              <RadioButton.Group
-                onValueChange={newDose => onChangeDose(newDose)}
-                value={dose}>
-                <View style={styles.radioBox}>
-                  <RadioButton style={styles.radio} value="1a. dose" />
-                  <Text>1a. dose</Text>
-                </View>
-                <View style={styles.radioBox}>
-                  <RadioButton style={styles.radio} value="2a. dose" />
-                  <Text>2a. dose</Text>
-                </View>
-                <View style={styles.radioBox}>
-                  <RadioButton style={styles.radio} value="3a. dose" />
-                  <Text>3a. dose</Text>
-                </View>
-                <View style={styles.radioBox}>
-                  <RadioButton style={styles.radio} value="Dose única" />
-                  <Text>Dose única</Text>
-                </View>
-              </RadioButton.Group>
-            </Provider>
-          </View>
-          {doseError.length > 0 && (
-            <Text style={styles.error}>{doseError}</Text>
-          )}
-        </View>
-
-        <View style={styles.inputSectionUpload}>
-          <View style={styles.labelBox}>
-            <Text style={styles.label}>Comprovante</Text>
-          </View>
-          <View style={styles.inputBoxUpload}>
-            <Button
-              onPress={createVaccine}
-              title="Selecionar Imagem..."
-              color="#419ED7"
-              accessibilityLabel="Learn more about this purple button"
-            />
-            <View style={styles.imgBox}></View>
-          </View>
-          {uploadError.length > 0 && (
-            <Text style={styles.error}>{uploadError}</Text>
-          )}
-        </View>
-
-        <View style={styles.inputSection}>
-          <View style={styles.labelBox}>
-            <Text style={styles.label}>Próxima vacinação</Text>
-          </View>
-          <View style={styles.inputBoxDate}>
-            <TextInput
-              style={styles.inputDate}
-              value={nextDate}
-              placeholder="Próxima vacinação"
-              placeholderTextColor="#419ED7"
-            />
-            <View style={styles.dateBox}>
-              <TouchableOpacity onPress={() => onChangeOpenNext(true)}>
-                <FontAwesomeIcon
-                  style={styles.icon}
-                  color={'#419ED7'}
-                  size={28}
-                  icon={faCalendar}></FontAwesomeIcon>
-              </TouchableOpacity>
-              <DatePicker
-                modal
-                open={openNext}
-                date={vaccineNextDate}
-                onConfirm={value => {
-                  changeNextDate(value);
-                }}
-                onCancel={() => {
-                  onChangeOpenNext(false);
-                }}
-              />
+          <View style={styles.inputSectionRadio}>
+            <View style={styles.labelBox}>
+              <Text style={styles.label}>Dose</Text>
             </View>
+            <View style={styles.inputBox}>
+              <Provider theme={theme}>
+                <RadioButton.Group
+                  onValueChange={newDose => onChangeDose(newDose)}
+                  value={dose}>
+                  <View style={styles.radioBox}>
+                    <RadioButton style={styles.radio} value="1a. dose" />
+                    <Text>1a. dose</Text>
+                  </View>
+                  <View style={styles.radioBox}>
+                    <RadioButton style={styles.radio} value="2a. dose" />
+                    <Text>2a. dose</Text>
+                  </View>
+                  <View style={styles.radioBox}>
+                    <RadioButton style={styles.radio} value="3a. dose" />
+                    <Text>3a. dose</Text>
+                  </View>
+                  <View style={styles.radioBox}>
+                    <RadioButton style={styles.radio} value="Dose única" />
+                    <Text>Dose única</Text>
+                  </View>
+                </RadioButton.Group>
+              </Provider>
+            </View>
+            {doseError.length > 0 && (
+              <Text style={styles.error}>{doseError}</Text>
+            )}
           </View>
-          {nextError.length > 0 && (
-            <Text style={styles.error}>{nextError}</Text>
-          )}
+
+          <View style={styles.inputSectionUpload}>
+            <View style={styles.labelBox}>
+              <Text style={styles.label}>Comprovante</Text>
+            </View>
+            <View style={styles.inputBoxUpload}>
+              <Button
+                onPress={createVaccine}
+                title="Selecionar Imagem..."
+                color="#419ED7"
+                accessibilityLabel="Learn more about this purple button"
+              />
+              <View style={styles.imgBox}></View>
+            </View>
+            {uploadError.length > 0 && (
+              <Text style={styles.error}>{uploadError}</Text>
+            )}
+          </View>
+
+          <View style={styles.inputSection}>
+            <View style={styles.labelBox}>
+              <Text style={styles.label}>Próxima vacinação</Text>
+            </View>
+            <View style={styles.inputBoxDate}>
+              <TextInput
+                style={styles.inputDate}
+                value={nextDate}
+                editable={false}
+                placeholder="Próxima vacinação"
+                placeholderTextColor="#419ED7"
+              />
+              <View style={styles.dateBox}>
+                <TouchableOpacity onPress={() => onChangeOpenNext(true)}>
+                  <FontAwesomeIcon
+                    style={styles.icon}
+                    color={'#419ED7'}
+                    size={28}
+                    icon={faCalendar}></FontAwesomeIcon>
+                </TouchableOpacity>
+                <DatePicker
+                  modal
+                  open={openNext}
+                  date={vaccineNextDate}
+                  onConfirm={value => {
+                    changeNextDate(value);
+                  }}
+                  onCancel={() => {
+                    onChangeOpenNext(false);
+                  }}
+                />
+              </View>
+            </View>
+            {nextError.length > 0 && (
+              <Text style={styles.error}>{nextError}</Text>
+            )}
+          </View>
         </View>
-      </View>
+      </ScrollView>
       <View style={styles.buttonContainer}>
         <View style={styles.buttonBox}>
           <Button
