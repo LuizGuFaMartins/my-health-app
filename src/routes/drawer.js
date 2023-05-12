@@ -1,8 +1,7 @@
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import { StyleSheet } from 'react-native';
+import {createDrawerNavigator} from '@react-navigation/drawer';
+import {StyleSheet} from 'react-native';
 
 import DrawerComponent from '../components/drawer/DrawerComponent';
-import CreateVaccine from '../pages/create-vaccine/CreateVaccine';
 import Home from '../pages/home/Home';
 import NextVaccine from '../pages/nextVaccine/NextVaccine';
 
@@ -31,19 +30,6 @@ export default function Routes() {
           headerTitleStyle: styles.headerTitleStyle,
         }}
       />
-      {/* <Drawer.Screen
-        name="Nova vacina"
-        component={CreateVaccine}
-        options={{
-          title: 'Nova vacina',
-          headerStyle: styles.headerStyle,
-          headerTintColor: styles.headerTintColor,
-          headerTitleStyle: styles.headerTitleStyle,
-          drawerLabel: () => null,
-          title: undefined,
-          drawerIcon: () => null,
-        }}
-      /> */}
     </Drawer.Navigator>
   );
 }

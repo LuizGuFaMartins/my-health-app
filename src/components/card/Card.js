@@ -4,14 +4,6 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 import {styles} from './Card_sty';
 
 const Card = ({vaccine, setId}) => {
-  // <Modal
-  //   animationType="none"
-  //   visible={true}
-  //   transparent={true}
-  //   onRequestClose={() => {
-  //     console.log('Modal closed');
-  //   }}></Modal>
-
   function returnData() {
     setId(vaccine.id);
   }

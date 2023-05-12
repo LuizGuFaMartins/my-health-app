@@ -9,21 +9,6 @@ import {styles} from './Home_sty';
 const Home = ({navigation}) => {
   const [search, onChangeSearch] = React.useState('');
   const [id, setId] = React.useState(0);
-  const nav = useNavigation();
-  let vaccines = [];
-
-  const updateId = newId => {
-    setId(newId);
-    goToEditPage();
-  };
-
-  // useFocusEffect(
-  //   React.useCallback(() => {
-  //     console.log(Vaccine.list());
-
-  //     // loadCards();
-  //   }, []),
-  // );
 
   useEffect(() => {
     if (id !== 0) goToEditPage();
@@ -35,7 +20,6 @@ const Home = ({navigation}) => {
   }
 
   function goToEditPage() {
-    console.log(id);
     navigation.push('Nova vacina', {id: id});
   }
 

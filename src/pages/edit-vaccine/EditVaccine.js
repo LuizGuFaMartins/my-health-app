@@ -6,10 +6,17 @@ import {Button, Text, TouchableOpacity, View} from 'react-native';
 import DatePicker from 'react-native-date-picker';
 import {ScrollView, TextInput} from 'react-native-gesture-handler';
 import {Provider, RadioButton} from 'react-native-paper';
-import {styles} from './CreateVaccine_sty';
+import {styles} from './EditVaccine_sty';
 import Vaccine from '../../models/Vaccine';
 
-const CreateVaccine = ({navigation}) => {
+const EditVaccine = ({navigation}) => {
+  // <Modal
+  //   animationType="none"
+  //   visible={true}
+  //   transparent={true}
+  //   onRequestClose={() => {
+  //     console.log('Modal closed');
+  //   }}></Modal>
   const [vaccineDate, onChangeVaccineDate] = React.useState(new Date());
   const [vaccineNextDate, onChangeVaccineNextDate] = React.useState(new Date());
   const [openDate, onChangeOpenDate] = React.useState(false);
@@ -257,4 +264,4 @@ const CreateVaccine = ({navigation}) => {
   );
 };
 
-export default CreateVaccine;
+export default EditVaccine;

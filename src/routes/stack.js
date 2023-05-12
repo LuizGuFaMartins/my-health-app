@@ -6,6 +6,7 @@ import CreateVaccine from '../pages/create-vaccine/CreateVaccine';
 import ForgotPassword from '../pages/forgot-password/ForgotPassword';
 import Login from '../pages/login/Login';
 import Main from '../pages/main';
+import EditVaccine from '../pages/edit-vaccine/EditVaccine';
 
 const Stack = createStackNavigator();
 
@@ -45,6 +46,16 @@ function StackNavigator() {
         component={CreateVaccine}
         options={{
           title: 'Nova vacina',
+          headerStyle: styles.headerStyle,
+          headerTintColor: styles.headerTintColor,
+          headerTitleStyle: styles.headerTitleStyle,
+        }}
+      />
+       <Stack.Screen
+        name="Editar vacina"
+        component={EditVaccine}
+        options={{
+          title: 'Editar vacina',
           headerStyle: styles.headerStyle,
           headerTintColor: styles.headerTintColor,
           headerTitleStyle: styles.headerTitleStyle,

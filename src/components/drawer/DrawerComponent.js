@@ -1,33 +1,39 @@
 import React from 'react';
-import {Button, Text, View} from 'react-native';
-import {TextInput} from 'react-native-gesture-handler';
-import {styles} from './DrawerComponent_sty';
-import {
-  DrawerContentScrollView,
-  DrawerItemList,
-} from '@react-navigation/drawer';
-import {Modal} from 'react-native-paper';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
+import { styles } from './DrawerComponent_sty';
 
 const DrawerComponent = props => {
-  // <Modal
-  //   animationType="none"
-  //   visible={true}
-  //   transparent={true}
-  //   onRequestClose={() => {
-  //     console.log('Modal closed');
-  //   }}></Modal>
-  
+  function goToMyVaccines() {
+    props.navigation.navigate('Home');
+  }
+
+  function goToNextVaccines() {
+    props.navigation.navigate('NextVaccine');
+  }
+
+  function signOut() {
+    props.navigation.popToTop();
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.title}>
         <Text style={styles.username}>Olá usuário</Text>
       </View>
-      <DrawerContentScrollView {...props}>
-        <DrawerItemList {...props}></DrawerItemList>
-      </DrawerContentScrollView>
-      {/* <Button>
-        props.navigation.popToTop();
-      </Button> */}
+      <View style={styles.routesList}>
+        <TouchableOpacity style={styles.routeItem} onPress={goToMyVaccines}>
+          <Image source={require('../../assets/images/icon-vaccine.jpg')} />
+          <Text style={styles.item}>Minhas vacinas</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.routeItem} onPress={goToNextVaccines}>
+          <Image source={require('../../assets/images/calendar.png')} />
+          <Text style={styles.item}>Próximas vacinas</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.routeItem} onPress={signOut}>
+          <Image source={require('../../assets/images/logout-green.png')} />
+          <Text style={styles.item}>Sair</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };

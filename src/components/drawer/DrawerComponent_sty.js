@@ -9,8 +9,8 @@ const styles = StyleSheet.create({
     padding: 15,
     position: 'relative',
     display: 'flex',
-    justifyContent: 'space-around',
-  },  
+    justifyContent: 'flex-start',
+  },
   title: {
     display: 'flex',
     justifyContent: 'center',
@@ -24,6 +24,20 @@ const styles = StyleSheet.create({
   username: {
     color: '#419ED7',
     fontSize: 36,
+  },
+  routesList: {
+    height: 200,
+  },
+  routeItem: {
+    padding: 10,
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  item: {
+    color: '#419ED7',
+    fontSize: 25,
+    padding: 10
   },
 });
 
