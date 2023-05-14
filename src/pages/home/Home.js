@@ -15,12 +15,6 @@ const Home = ({navigation}) => {
     if (id !== 0) goToEditPage();
   }, [id]);
 
-  // useEffect(() => {
-  //   const vaccines = Vaccine.list();
-  //   console.log('vaccines: ', vaccines);
-  //   setVaccineList(vaccines);
-  // }, []);
-
   useFocusEffect(
     React.useCallback(() => {
       let mounted = true;
