@@ -5,7 +5,7 @@ import React, {useEffect} from 'react';
 import {Button, Text, TouchableOpacity, View} from 'react-native';
 import DatePicker from 'react-native-date-picker';
 import {ScrollView, TextInput} from 'react-native-gesture-handler';
-import {Provider, RadioButton} from 'react-native-paper';
+import {Modal, Portal, Provider, RadioButton} from 'react-native-paper';
 import Vaccine from '../../models/Vaccine';
 import {styles} from './EditVaccine_sty';
 import Users from '../../models/Users';
@@ -13,12 +13,13 @@ import Users from '../../models/Users';
 const EditVaccine = ({navigation, route}) => {
   // <Modal
   //   animationType="none"
-  //   visible={true}
-  //   transparent={true}
-  //   onRequestClose={() => {
-  //     console.log('Modal closed');
+  // visible={true}
+  // transparent={true}
+  // onRequestClose={() => {
+  //   console.log('Modal closed');
   //   }}></Modal>
   const {id} = route.params;
+  const [visible, setVisible] = React.useState(false);
   const [vaccineDate, onChangeVaccineDate] = React.useState(new Date());
   const [vaccineNextDate, onChangeVaccineNextDate] = React.useState(new Date());
   const [openDate, onChangeOpenDate] = React.useState(false);
@@ -72,6 +73,9 @@ const EditVaccine = ({navigation, route}) => {
       secondary: '#419ED7', // cor quando selecionado
     },
   };
+
+  const showModal = () => setVisible(true);
+  const hideModal = () => setVisible(false);
 
   function validateFields() {
     onChangeDateError('');
@@ -284,13 +288,48 @@ const EditVaccine = ({navigation, route}) => {
           />
         </View>
         <View style={styles.buttonBox}>
-          <Button
-            onPress={updateVaccine}
-            title="Excluir"
-            color="#FD7979"
-            accessibilityLabel="Learn more about this purple button"
-            style={styles.button}
-          />
+          <Provider>
+            <Portal>
+              <Modal
+                visible={visible}
+                onDismiss={hideModal}
+                transparent={true}
+                contentContainerStyle={styles.modalBox}>
+                <View style={styles.modal}>
+                  <Text style={styles.modalTitle}>
+                    Tem certeza que deseja remover essa vacina?
+                  </Text>
+                  <View style={styles.modalButtons}>
+                    <View style={styles.buttonBox}>
+                      <Button
+                        onPress={deleteVaccine}
+                        title="Sim"
+                        color="#FD7979"
+                        accessibilityLabel="Learn more about this purple button"
+                        style={styles.button}
+                      />
+                    </View>
+                    <View style={styles.buttonBox}>
+                      <Button
+                        onPress={hideModal}
+                        title="Cancelar"
+                        color="#37BD6D"
+                        accessibilityLabel="Learn more about this purple button"
+                        style={styles.button}
+                      />
+                    </View>
+                  </View>
+                </View>
+              </Modal>
+            </Portal>
+            <Button
+              onPress={showModal}
+              title="Excluir"
+              color="#FD7979"
+              accessibilityLabel="Learn more about this purple button"
+              style={styles.button}
+            />
+          </Provider>
         </View>
       </View>
     </View>

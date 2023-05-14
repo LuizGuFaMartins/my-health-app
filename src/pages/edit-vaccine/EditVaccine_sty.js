@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
   buttonBox: {
     width: '40%',
     fontSize: 18,
-    margin: 5
+    margin: 5,
   },
   button: {
     width: '100%',
@@ -152,6 +152,36 @@ const styles = StyleSheet.create({
     color: 'red',
     zIndex: 99,
   },
+  modalBox: {
+    width: '100%',
+    height: '100%',
+    position: 'relative',
+  },
+  modal: {
+    position: 'absolute',
+    top: -450,
+    left: -78,
+    width: 300,
+    height: 200,
+    backgroundColor: 'white',
+    display: 'flex',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    borderColor: '#B9DFDB',
+    borderWidth: 5
+  },
+  modalTitle: {
+    color: '#FD7979',
+    fontSize: 25, 
+    textAlign: 'center',
+    padding: 10,
+  },
+  modalButtons: {
+    display: 'flex',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    flexDirection: 'row'
+  }
 });
 
 export {styles};
