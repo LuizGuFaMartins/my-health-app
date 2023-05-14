@@ -47,7 +47,7 @@ const CreateAccount = ({navigation}) => {
       const user = {
         name,
         gender,
-        birthdayDate,
+        birthdayDateInput,
         email,
         password,
       };

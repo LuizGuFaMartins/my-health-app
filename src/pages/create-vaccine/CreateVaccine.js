@@ -122,7 +122,6 @@ const CreateVaccine = ({navigation}) => {
                 </TouchableOpacity>
                 <DatePicker
                   modal
-                  mode="date"
                   open={openDate}
                   date={vaccineDate}
                   onConfirm={value => {
@@ -230,7 +229,6 @@ const CreateVaccine = ({navigation}) => {
                 </TouchableOpacity>
                 <DatePicker
                   modal
-                  mode="date"
                   open={openNext}
                   date={vaccineNextDate}
                   onConfirm={value => {

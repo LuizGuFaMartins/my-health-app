@@ -122,6 +122,7 @@ const styles = StyleSheet.create({
   buttonBox: {
     width: '40%',
     fontSize: 18,
+    margin: 5
   },
   button: {
     width: '100%',

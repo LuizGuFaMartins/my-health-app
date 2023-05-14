@@ -14,10 +14,14 @@ module.exports = {
     vaccines.push(newVaccine);
     return newVaccine;
   },
-  update(id, name) {
+  update(id, vaccine) {
     let pos = this.getPositionById(id);
     if (pos >= 0) {
-      vaccines[pos].name = name;
+      vaccines[pos].date = vaccine.date;
+      vaccines[pos].vaccine = vaccine.vaccine;
+      vaccines[pos].dose = vaccine.dose;
+      vaccines[pos].uploadUrl = vaccine.uploadUrl;
+      vaccines[pos].nextDate = vaccine.nextDate;
     }
   },
   list() {

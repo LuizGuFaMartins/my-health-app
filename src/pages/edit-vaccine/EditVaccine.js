@@ -1,15 +1,16 @@
-import { faCalendar } from '@fortawesome/free-regular-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import {faCalendar} from '@fortawesome/free-regular-svg-icons';
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import moment from 'moment';
-import React from 'react';
-import { Button, Text, TouchableOpacity, View } from 'react-native';
+import React, {useEffect} from 'react';
+import {Button, Text, TouchableOpacity, View} from 'react-native';
 import DatePicker from 'react-native-date-picker';
-import { ScrollView, TextInput } from 'react-native-gesture-handler';
-import { Provider, RadioButton } from 'react-native-paper';
+import {ScrollView, TextInput} from 'react-native-gesture-handler';
+import {Provider, RadioButton} from 'react-native-paper';
 import Vaccine from '../../models/Vaccine';
-import { styles } from './EditVaccine_sty';
+import {styles} from './EditVaccine_sty';
+import Users from '../../models/Users';
 
-const EditVaccine = ({navigation}) => {
+const EditVaccine = ({navigation, route}) => {
   // <Modal
   //   animationType="none"
   //   visible={true}
@@ -17,6 +18,7 @@ const EditVaccine = ({navigation}) => {
   //   onRequestClose={() => {
   //     console.log('Modal closed');
   //   }}></Modal>
+  const {id} = route.params;
   const [vaccineDate, onChangeVaccineDate] = React.useState(new Date());
   const [vaccineNextDate, onChangeVaccineNextDate] = React.useState(new Date());
   const [openDate, onChangeOpenDate] = React.useState(false);
@@ -34,7 +36,18 @@ const EditVaccine = ({navigation}) => {
   const [uploadError, onChangeUploadError] = React.useState('');
   const [nextError, onChangeNextError] = React.useState('');
 
-  function createVaccine() {
+  useEffect(() => {
+    const vac = Vaccine.getElementById(id);
+    if (vac) {
+      onChangeDate(vac.date);
+      onChangeVaccine(vac.vaccine);
+      onChangeDose(vac.dose);
+      onChangeUploadUrl(vac.uploadUrl);
+      onChangeNextDate(vac.nextDate);
+    }
+  }, []);
+
+  function updateVaccine() {
     if (validateFields()) {
       const data = {
         date,
@@ -43,9 +56,14 @@ const EditVaccine = ({navigation}) => {
         uploadUrl,
         nextDate,
       };
-      Vaccine.new(data);
+      Vaccine.update(id, data);
       navigation.navigate('Home', {});
     }
+  }
+
+  function deleteVaccine() {
+    Vaccine.delete(id);
+    navigation.navigate('Home', {});
   }
 
   const theme = {
@@ -203,7 +221,7 @@ const EditVaccine = ({navigation}) => {
             </View>
             <View style={styles.inputBoxUpload}>
               <Button
-                onPress={createVaccine}
+                onPress={updateVaccine}
                 title="Selecionar Imagem..."
                 color="#419ED7"
                 accessibilityLabel="Learn more about this purple button"
@@ -258,9 +276,18 @@ const EditVaccine = ({navigation}) => {
       <View style={styles.buttonContainer}>
         <View style={styles.buttonBox}>
           <Button
-            onPress={createVaccine}
-            title="Cadastrar"
+            onPress={updateVaccine}
+            title="Salvar alterações"
             color="#37BD6D"
+            accessibilityLabel="Learn more about this purple button"
+            style={styles.button}
+          />
+        </View>
+        <View style={styles.buttonBox}>
+          <Button
+            onPress={updateVaccine}
+            title="Excluir"
+            color="#FD7979"
             accessibilityLabel="Learn more about this purple button"
             style={styles.button}
           />

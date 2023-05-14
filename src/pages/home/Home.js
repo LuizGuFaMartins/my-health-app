@@ -4,21 +4,50 @@ import {ScrollView, TextInput} from 'react-native-gesture-handler';
 import Card from '../../components/card/Card';
 import Vaccine from '../../models/Vaccine';
 import {styles} from './Home_sty';
+import {useFocusEffect} from '@react-navigation/native';
 
 const Home = ({navigation}) => {
   const [search, onChangeSearch] = React.useState('');
   const [id, setId] = React.useState(0);
+  const [vaccineList, setVaccineList] = React.useState([]);
 
   useEffect(() => {
     if (id !== 0) goToEditPage();
   }, [id]);
 
+  // useEffect(() => {
+  //   const vaccines = Vaccine.list();
+  //   console.log('vaccines: ', vaccines);
+  //   setVaccineList(vaccines);
+  // }, []);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      let mounted = true;
+
+      async function fetchData() {
+        try {
+          let vaccines = Vaccine.list();
+          if (mounted) {
+            setVaccineList(vaccines);
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      }
+
+      fetchData();
+
+      return () => {
+        mounted = false;
+      };
+    }, []),
+  );
+
   function loadCards() {
-    if (Vaccine.list().length > 0) {
-      return Vaccine.list().map(vac => (
-        <Card vaccine={vac} setId={setId}></Card>
-      ));
-    }
+    // if (Vaccine.list().length > 0 && Vaccine.list()) {
+    return vaccineList.map(vac => <Card vaccine={vac} setId={setId}></Card>);
+    // }
   }
 
   function goToEditPage() {
