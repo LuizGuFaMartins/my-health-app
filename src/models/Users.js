@@ -6,8 +6,10 @@ module.exports = {
     let newUser = {
       id: ++ids,
       nome: user.nome,
+      gender: user.gender,
+      birthdayDate: user.birthdayDate,
       email: user.email,
-      senha: user.senha,
+      password: user.password,
     };
     users.push(newUser);
     return newUser;

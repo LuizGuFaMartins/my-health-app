@@ -38,7 +38,17 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     flexDirection: 'row',
     padding: 10,
-    paddingHorizontal: 20
+    paddingHorizontal: 20,
+    position: 'relative',
+  },
+  inputSectionRadio: {
+    height: 140,
+    display: 'flex',
+    justifyContent: 'center',
+    flexDirection: 'row',
+    padding: 10,
+    paddingHorizontal: 20,
+    position: 'relative',
   },
   labelBox: {
     width: '35%',
@@ -53,11 +63,40 @@ const styles = StyleSheet.create({
   inputBox: {
     width: '65%',
   },
+  inputBoxDate: {
+    width: '65%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
   input: {
     height: 41,
     backgroundColor: 'white',
     color: '#419ED7',
     paddingHorizontal: 10,
+  },
+  inputDate: {
+    width: 158,
+    height: 41,
+    backgroundColor: 'white',
+    color: '#419ED7',
+    paddingHorizontal: 10,
+  },
+  dateBox: {
+    backgroundColor: 'white',
+    width: 50,
+    height: 41,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  icon: {
+    fontSize: 20,
+  },
+  inputDateButton: {
+    width: 50,
+    height: 41,
   },
   buttonContainer: {
     width: '100%',
@@ -75,6 +114,25 @@ const styles = StyleSheet.create({
   button: {
     width: '100%',
     backgroundColor: 'red',
+  },
+  radioBox: {
+    width: 150,
+    margin: -3,
+    display: 'flex',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
+  radio: {
+    color: 'white',
+    backgroundColor: '#419ED7',
+  },
+  error: {
+    position: 'absolute',
+    bottom: -6,
+    left: 130,
+    color: 'red',
+    zIndex: 99,
   },
 });
 
