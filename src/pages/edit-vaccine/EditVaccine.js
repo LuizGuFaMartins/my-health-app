@@ -1,13 +1,13 @@
-import {faCalendar} from '@fortawesome/free-regular-svg-icons';
-import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import { faCalendar } from '@fortawesome/free-regular-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import moment from 'moment';
 import React from 'react';
-import {Button, Text, TouchableOpacity, View} from 'react-native';
+import { Button, Text, TouchableOpacity, View } from 'react-native';
 import DatePicker from 'react-native-date-picker';
-import {ScrollView, TextInput} from 'react-native-gesture-handler';
-import {Provider, RadioButton} from 'react-native-paper';
-import {styles} from './EditVaccine_sty';
+import { ScrollView, TextInput } from 'react-native-gesture-handler';
+import { Provider, RadioButton } from 'react-native-paper';
 import Vaccine from '../../models/Vaccine';
+import { styles } from './EditVaccine_sty';
 
 const EditVaccine = ({navigation}) => {
   // <Modal
@@ -129,6 +129,7 @@ const EditVaccine = ({navigation}) => {
                 </TouchableOpacity>
                 <DatePicker
                   modal
+                  mode="date"
                   open={openDate}
                   date={vaccineDate}
                   onConfirm={value => {
@@ -236,6 +237,7 @@ const EditVaccine = ({navigation}) => {
                 </TouchableOpacity>
                 <DatePicker
                   modal
+                  mode="date"
                   open={openNext}
                   date={vaccineNextDate}
                   onConfirm={value => {

@@ -190,6 +190,7 @@ const CreateAccount = ({navigation}) => {
                 </TouchableOpacity>
                 <DatePicker
                   modal
+                  mode="date"
                   open={openDate}
                   date={birthdayDate}
                   onConfirm={value => {
