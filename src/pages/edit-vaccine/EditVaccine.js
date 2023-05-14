@@ -11,13 +11,6 @@ import {styles} from './EditVaccine_sty';
 import Users from '../../models/Users';
 
 const EditVaccine = ({navigation, route}) => {
-  // <Modal
-  //   animationType="none"
-  // visible={true}
-  // transparent={true}
-  // onRequestClose={() => {
-  //   console.log('Modal closed');
-  //   }}></Modal>
   const {id} = route.params;
   const [visible, setVisible] = React.useState(false);
   const [vaccineDate, onChangeVaccineDate] = React.useState(new Date());
@@ -36,6 +29,16 @@ const EditVaccine = ({navigation, route}) => {
   const [doseError, onChangeDoseError] = React.useState('');
   const [uploadError, onChangeUploadError] = React.useState('');
   const [nextError, onChangeNextError] = React.useState('');
+
+  const theme = {
+    colors: {
+      primary: '#419ED7', // cor quando selecionado
+      secondary: '#419ED7', // cor quando selecionado
+    },
+  };
+
+  const showModal = () => setVisible(true);
+  const hideModal = () => setVisible(false);
 
   useEffect(() => {
     const vac = Vaccine.getElementById(id);
@@ -66,16 +69,6 @@ const EditVaccine = ({navigation, route}) => {
     Vaccine.delete(id);
     navigation.navigate('Home', {});
   }
-
-  const theme = {
-    colors: {
-      primary: '#419ED7', // cor quando selecionado
-      secondary: '#419ED7', // cor quando selecionado
-    },
-  };
-
-  const showModal = () => setVisible(true);
-  const hideModal = () => setVisible(false);
 
   function validateFields() {
     onChangeDateError('');

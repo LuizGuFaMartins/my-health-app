@@ -8,7 +8,7 @@ const Card = ({vaccine, setId}) => {
     setId(vaccine.id);
   }
 
-  vaccine.uploadUrl = require('../../assets/images/icon-vaccine.jpg');
+  vaccine.uploadUrl = require('../../assets/images/doc.jpg');
 
   return (
     <View style={styles.card}>
@@ -19,7 +19,7 @@ const Card = ({vaccine, setId}) => {
           <Text style={styles.titleDate.date}>{vaccine.date}</Text>
         </View>
         <View style={styles.imageCardBox}>
-          <Image style={styles.vaccineIcon} source={vaccine.uploadUrl} />
+          <Image style={styles.image} source={vaccine.uploadUrl} />
         </View>
         <Text style={styles.nextText}>{vaccine.nextDate}</Text>
       </TouchableOpacity>
