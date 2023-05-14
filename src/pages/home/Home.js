@@ -15,6 +15,17 @@ const Home = ({navigation}) => {
     if (id !== 0) goToEditPage();
   }, [id]);
 
+  useEffect(() => {
+    if (search) {
+      const filteredVaccines = vaccineList.filter(vac =>
+        vac.vaccine.toUpperCase().includes(search.toUpperCase()),
+      );
+      setVaccineList(filteredVaccines);
+    } else {
+      setVaccineList(Vaccine.list());
+    }
+  }, [search]);
+
   useFocusEffect(
     React.useCallback(() => {
       let mounted = true;
@@ -39,9 +50,7 @@ const Home = ({navigation}) => {
   );
 
   function loadCards() {
-    // if (Vaccine.list().length > 0 && Vaccine.list()) {
     return vaccineList.map(vac => <Card vaccine={vac} setId={setId}></Card>);
-    // }
   }
 
   function goToEditPage() {
