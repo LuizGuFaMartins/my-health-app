@@ -8,7 +8,7 @@ const SimpleCard = ({vaccine, setId}) => {
     setId(vaccine.id);
   }
   return (
-    <View style={styles.simpleCard}>
+    <View key={vaccine.id} style={styles.simpleCard}>
       <TouchableOpacity onPress={returnData}>
         <Text style={styles.title}>{vaccine.vaccine}</Text>
         <Text style={styles.nextDate}>{vaccine.nextDate}</Text>

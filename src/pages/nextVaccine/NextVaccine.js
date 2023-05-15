@@ -1,42 +1,24 @@
+import {useIsFocused} from '@react-navigation/native';
 import React, {useEffect} from 'react';
 import {Button, View} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import SimpleCard from '../../components/simple-card /SimpleCard';
 import Vaccine from '../../models/Vaccine';
 import {styles} from './NextVaccine_sty';
-import { useFocusEffect } from '@react-navigation/native';
 
 const NextVaccine = ({navigation}) => {
-  const [search, onChangeSearch] = React.useState('');
   const [id, setId] = React.useState(0);
   const [vaccineList, setVaccineList] = React.useState([]);
+  const isFocused = useIsFocused();
 
   useEffect(() => {
     if (id !== 0) goToEditPage();
   }, [id]);
 
-  useFocusEffect(
-    React.useCallback(() => {
-      let mounted = true;
-
-      async function fetchData() {
-        try {
-          let vaccines = Vaccine.list();
-          if (mounted) {
-            setVaccineList(vaccines);
-          }
-        } catch (error) {
-          console.log(error);
-        }
-      }
-
-      fetchData();
-
-      return () => {
-        mounted = false;
-      };
-    }, []),
-  );
+  useEffect(() => {
+    let vaccines = Vaccine.list();
+    setVaccineList(vaccines);
+  }, [isFocused]);
 
   function loadCards() {
     return vaccineList.map(vac => (

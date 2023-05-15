@@ -1,15 +1,21 @@
+import {useIsFocused} from '@react-navigation/native';
 import React, {useEffect} from 'react';
 import {Button, Image, View} from 'react-native';
 import {ScrollView, TextInput} from 'react-native-gesture-handler';
 import Card from '../../components/card/Card';
 import Vaccine from '../../models/Vaccine';
 import {styles} from './Home_sty';
-import {useFocusEffect} from '@react-navigation/native';
 
 const Home = ({navigation}) => {
   const [search, onChangeSearch] = React.useState('');
   const [id, setId] = React.useState(0);
   const [vaccineList, setVaccineList] = React.useState([]);
+  const isFocused = useIsFocused();
+
+  useEffect(() => {
+    vaccines = Vaccine.list();
+    setVaccineList(vaccines);
+  }, [isFocused]);
 
   useEffect(() => {
     if (id !== 0) goToEditPage();
@@ -25,29 +31,6 @@ const Home = ({navigation}) => {
       setVaccineList(Vaccine.list());
     }
   }, [search]);
-
-  useFocusEffect(
-    React.useCallback(() => {
-      let mounted = true;
-
-      async function fetchData() {
-        try {
-          let vaccines = Vaccine.list();
-          if (mounted) {
-            setVaccineList(vaccines);
-          }
-        } catch (error) {
-          console.log(error);
-        }
-      }
-
-      fetchData();
-
-      return () => {
-        mounted = false;
-      };
-    }, []),
-  );
 
   function loadCards() {
     return vaccineList.map(vac => <Card vaccine={vac} setId={setId}></Card>);

@@ -19,8 +19,8 @@ const Login = ({navigation}) => {
   const [passwordError, onChangePasswordError] = React.useState('');
 
   function signIn() {
-    navigation.navigate('Main', {name: 'Luiz'});
     if (validateFields()) {
+      navigation.navigate('Main', {name: 'Luiz'});
     }
   }
 
