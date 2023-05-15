@@ -109,13 +109,15 @@ const EditVaccine = ({navigation, route}) => {
   function changeDate(value) {
     onChangeOpenDate(false);
     onChangeVaccineDate(value);
-    onChangeDate(moment(value).format('DD/MM/YYYY'));
+    let formatedDate = moment(value).format('DD/MM/YYYY');
+    onChangeDate(formatedDate);
   }
 
   function changeNextDate(value) {
     onChangeOpenNext(false);
     onChangeVaccineNextDate(value);
-    onChangeNextDate(moment(value).format('DD/MM/YYYY'));
+    let formatedDate = moment(value).format('DD/MM/YYYY');
+    onChangeNextDate(formatedDate);
   }
 
   return (
