@@ -8,6 +8,8 @@ import {ScrollView, TextInput} from 'react-native-gesture-handler';
 import {Provider, RadioButton} from 'react-native-paper';
 import {styles} from './CreateVaccine_sty';
 import Vaccine from '../../models/Vaccine';
+import {addDoc, collection} from 'firebase/firestore';
+import {db, storage} from '../../firebase/config';
 
 const CreateVaccine = ({navigation}) => {
   const [vaccineDate, onChangeVaccineDate] = React.useState(new Date());
@@ -40,6 +42,17 @@ const CreateVaccine = ({navigation}) => {
       navigation.navigate('Home', {});
     }
   }
+
+  // const takePicture = () => {
+  //   launchCamera({mediaType: 'photo', cameraType: 'back', quality: 1})
+  //     .then(result => {
+  //       setFoto(result.assets[0]);
+  //       setUrlFoto(result.assets[0].uri);
+  //     })
+  //     .catch(error => {
+  //       console.log('Error ao capturar imagem: ' + JSON.stringify(error));
+  //     });
+  // };
 
   const theme = {
     colors: {

@@ -1,5 +1,6 @@
-import {faCalendar} from '@fortawesome/free-regular-svg-icons';
-import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import { faCalendar } from '@fortawesome/free-regular-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 import moment from 'moment';
 import React from 'react';
 import {
@@ -11,21 +12,24 @@ import {
   View,
 } from 'react-native';
 import DatePicker from 'react-native-date-picker';
-import {ScrollView} from 'react-native-gesture-handler';
-import {Provider, RadioButton} from 'react-native-paper';
-import {styles} from './CreateAccount_sty';
+import { ScrollView } from 'react-native-gesture-handler';
+import { Provider, RadioButton } from 'react-native-paper';
+import { auth } from '../../firebase/config.js';
 import Users from '../../models/Users';
+import { styles } from './CreateAccount_sty';
 
 const CreateAccount = ({navigation}) => {
   const [openDate, onChangeOpenDate] = React.useState(false);
 
-  const [name, onChangeName] = React.useState('');
-  const [gender, onChangeGender] = React.useState('');
-  const [birthdayDateInput, onChangeBirthdayDateInput] = React.useState('');
+  const [name, onChangeName] = React.useState('Nome');
+  const [gender, onChangeGender] = React.useState('Masculino');
+  const [birthdayDateInput, onChangeBirthdayDateInput] =
+    React.useState('07/03/2002');
   const [birthdayDate, onChangeBirthdayDate] = React.useState(new Date());
-  const [email, onChangeEmail] = React.useState('');
-  const [password, onChangePassword] = React.useState('');
-  const [confirmPassword, onChangeConfirmPassword] = React.useState('');
+  const [email, onChangeEmail] = React.useState('email@gmail.com');
+  const [password, onChangePassword] = React.useState('123456789');
+  const [confirmPassword, onChangeConfirmPassword] =
+    React.useState('123456789');
 
   const [nameError, onChangeNameError] = React.useState('');
   const [genderError, onChangeGenderError] = React.useState('');
@@ -52,7 +56,13 @@ const CreateAccount = ({navigation}) => {
         password,
       };
       Users.new(user);
-      navigation.navigate('Login', {});
+
+      createUserWithEmailAndPassword(auth, email, password)
+        .then(user => {
+          console.log('Usuário criado com sucesso: ', JSON.stringify(user));
+          navigation.navigate('Login', {});
+        })
+        .catch(error => console.log(JSON.stringify(error)));
     }
   }
 
@@ -177,7 +187,7 @@ const CreateAccount = ({navigation}) => {
                 style={styles.inputDate}
                 value={birthdayDateInput}
                 editable={false}
-                placeholder="Data de vacinação"
+                placeholder="Data de nascimento"
                 placeholderTextColor="#419ED7"
               />
               <View style={styles.dateBox}>

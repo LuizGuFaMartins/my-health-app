@@ -1,17 +1,23 @@
+import { sendPasswordResetEmail } from 'firebase/auth';
 import React from 'react';
-import {Button, Image, Text, View} from 'react-native';
-import {TextInput} from 'react-native-paper';
-import {styles} from './ForgotPassword_sty';
+import { Button, Image, Text, View } from 'react-native';
+import { TextInput } from 'react-native-paper';
+import { auth } from '../../firebase/config';
+import { styles } from './ForgotPassword_sty';
 
 const ForgotPassword = ({navigation}) => {
   const [email, onChangeEmail] = React.useState('');
-  const [password, onChangePassword] = React.useState('');
-
   const [emailError, onChangeEmailError] = React.useState('');
-  const [passwordError, onChangePasswordError] = React.useState('');
 
-  function createAccount() {
-    navigation.navigate('Login', {name: 'Luiz'});
+  function changePassword() {
+    if (validateFields()) {
+      sendPasswordResetEmail(auth, email)
+        .then(() => {
+          console.log('E-mail de redefinição enviado com sucesso.');
+          navigation.navigate('Login', {name: 'Luiz'});
+        })
+        .catch(error => console.log(JSON.stringify(error)));
+    }
   }
 
   function validateFields() {
@@ -67,7 +73,7 @@ const ForgotPassword = ({navigation}) => {
       <View style={styles.buttonContainer}>
         <View style={styles.buttonBox}>
           <Button
-            onPress={createAccount}
+            onPress={changePassword}
             title="Recuperar senha"
             color="#37BD6D"
             accessibilityLabel="Learn more about this purple button"
