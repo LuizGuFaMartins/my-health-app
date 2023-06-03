@@ -3,6 +3,7 @@ import {Text, View} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {styles} from './SimpleCard_sty';
 import {useDispatch} from 'react-redux';
+import {reducerSetVaccine} from '../../redux/vaccines/vaccineSlice';
 
 const SimpleCard = ({vaccine, navigation}) => {
   const dispatch = useDispatch();
@@ -10,16 +11,16 @@ const SimpleCard = ({vaccine, navigation}) => {
   function goToEditPage() {
     dispatch(
       reducerSetVaccine({
-        id: vaccine.id,
-        date: vaccine.date,
-        vaccine: vaccine.vaccine,
-        dose: vaccine.dose,
-        uploadUrl: vaccine.uploadUrl,
-        nextDate: vaccine.nextDate,
-        userId: vaccine.userId,
+        id: vaccine.item.id,
+        date: vaccine.item.date,
+        vaccine: vaccine.item.vaccine,
+        dose: vaccine.item.dose,
+        uploadUrl: vaccine.item.uploadUrl,
+        nextDate: vaccine.item.nextDate,
+        userId: vaccine.item.userId,
       }),
     );
-    navigation.push('Editar vacina', {vaccine: vaccine.item});
+    navigation.push('Editar vacina');
   }
   return (
     <View key={vaccine.item.id} style={styles.simpleCard}>

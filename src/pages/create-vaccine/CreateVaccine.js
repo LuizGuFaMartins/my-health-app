@@ -17,7 +17,7 @@ const CreateVaccine = ({navigation}) => {
   const [vaccineNextDate, onChangeVaccineNextDate] = React.useState(new Date());
   const [openDate, onChangeOpenDate] = React.useState(false);
   const [openNext, onChangeOpenNext] = React.useState(false);
-  const [user, setUser] = React.useState();
+  const [loading, setLoading] = React.useState(false);
 
   const [date, onChangeDate] = React.useState('');
   const [vaccine, onChangeVaccine] = React.useState('');
@@ -34,6 +34,7 @@ const CreateVaccine = ({navigation}) => {
 
   async function createVaccine() {
     if (validateFields()) {
+      setLoading(true);
       const collectio = collection(db, 'vaccines');
       const imageRef = ref(storage, `ìmages/${upload.fileName}`);
 
@@ -56,6 +57,7 @@ const CreateVaccine = ({navigation}) => {
                 console.log(
                   'Vacina inserida com sucesso: ' + JSON.stringify(refDoc),
                 );
+                setLoading(false);
                 navigation.navigate('Home', {});
               })
               .catch(error => {
@@ -293,6 +295,11 @@ const CreateVaccine = ({navigation}) => {
           </View>
         </View>
       </ScrollView>
+      {loading && (
+        <View style={styles.loading}>
+          <Text style={styles.loading.title}>Salvando vacina...</Text>
+        </View>
+      )}
       <View style={styles.buttonContainer}>
         <View style={styles.buttonBox}>
           <Button

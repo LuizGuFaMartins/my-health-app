@@ -14,6 +14,7 @@ import {auth, db, storage} from '../../firebase/config';
 import {launchCamera} from 'react-native-image-picker';
 import {getDownloadURL, ref, uploadBytes} from 'firebase/storage';
 import {useSelector} from 'react-redux';
+import {useIsFocused} from '@react-navigation/native';
 
 const EditVaccine = ({navigation, route}) => {
   const stateVaccine = useSelector(state => state.vaccine);
@@ -22,6 +23,7 @@ const EditVaccine = ({navigation, route}) => {
   const [vaccineNextDate, onChangeVaccineNextDate] = React.useState(new Date());
   const [openDate, onChangeOpenDate] = React.useState(false);
   const [openNext, onChangeOpenNext] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
 
   const [date, onChangeDate] = React.useState('');
   const [vaccine, onChangeVaccine] = React.useState('');
@@ -58,38 +60,61 @@ const EditVaccine = ({navigation, route}) => {
 
   async function updateVaccine() {
     if (validateFields()) {
-      const imageRef = ref(storage, `ìmages/${upload.fileName}`);
+      setLoading(true);
       const refVaccine = doc(db, 'vaccines', stateVaccine.id);
 
-      const file = await fetch(uploadUrl);
-      const blob = await file.blob();
-
-      uploadBytes(imageRef, blob, {contentType: 'image/jpeg'})
-        .then(result => {
-          console.log('Arquivo foi enviado com sucesso.');
-          getDownloadURL(imageRef).then(url => {
-            updateDoc(refVaccine, {
-              date,
-              vaccine,
-              dose,
-              uploadUrl: url,
-              nextDate,
-              userId: auth.currentUser.uid,
-            })
-              .then(refDoc => {
-                console.log(
-                  'Vacina inserida com sucesso: ' + JSON.stringify(refDoc),
-                );
-                navigation.navigate('Home', {});
-              })
-              .catch(error => {
-                console.log('Error: ' + JSON.stringify(error));
-              });
-          });
+      if (!upload) {
+        updateDoc(refVaccine, {
+          date,
+          vaccine,
+          dose,
+          uploadUrl: uploadUrl,
+          nextDate,
         })
-        .catch(error => {
-          console.log('Erro ao enviar arquivo: ' + JSON.stringify(error));
-        });
+          .then(refDoc => {
+            console.log(
+              'Vacina inserida com sucesso: ' + JSON.stringify(refDoc),
+            );
+            setLoading(false);
+            navigation.navigate('Home', {});
+          })
+          .catch(error => {
+            console.log('Error: ' + JSON.stringify(error));
+          });
+      } else {
+        const imageRef = ref(storage, `ìmages/${upload.fileName}`);
+
+        const file = await fetch(uploadUrl);
+        const blob = await file.blob();
+
+        uploadBytes(imageRef, blob, {contentType: 'image/jpeg'})
+          .then(result => {
+            console.log('Arquivo foi enviado com sucesso.');
+            getDownloadURL(imageRef).then(url => {
+              updateDoc(refVaccine, {
+                date,
+                vaccine,
+                dose,
+                uploadUrl: url,
+                nextDate,
+                userId: auth.currentUser.uid,
+              })
+                .then(refDoc => {
+                  console.log(
+                    'Vacina inserida com sucesso: ' + JSON.stringify(refDoc),
+                  );
+                  setLoading(false);
+                  navigation.navigate('Home', {});
+                })
+                .catch(error => {
+                  console.log('Error: ' + JSON.stringify(error));
+                });
+            });
+          })
+          .catch(error => {
+            console.log('Erro ao enviar arquivo: ' + JSON.stringify(error));
+          });
+      }
     }
   }
 
@@ -325,6 +350,11 @@ const EditVaccine = ({navigation, route}) => {
           </View>
         </View>
       </ScrollView>
+      {loading && (
+        <View style={styles.loading}>
+          <Text style={styles.loading.title}>Salvando edição...</Text>
+        </View>
+      )}
       <View style={styles.buttonContainer}>
         <View style={styles.buttonBox}>
           <Button

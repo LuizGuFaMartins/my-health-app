@@ -83,6 +83,16 @@ const styles = StyleSheet.create({
       fontSize: 25,
       color: '#3F92C5',
     }
+  },
+  noVaccines: {
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    title: {
+      fontSize: 25,
+      color: '#3F92C5',
+    }
   }
 });
 

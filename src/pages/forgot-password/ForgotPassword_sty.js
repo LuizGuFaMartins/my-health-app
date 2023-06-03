@@ -7,7 +7,6 @@ const styles = StyleSheet.create({
     fontFamily: 'Averia Libre',
     fontSize: 38,
     paddingVertical: 100,
-    paddingTop: 280,
     position: 'relative',
     display: 'flex',
     justifyContent: 'space-around',
@@ -61,9 +60,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   buttonContainer: {
+    width: '100%',
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
+    position: 'absolute',
+    bottom: 30,
+    paddingBottom: 30,
   },
   buttonBox: {
     width: '40%',

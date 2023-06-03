@@ -110,6 +110,17 @@ const styles = StyleSheet.create({
     width: 50,
     height: 41,
   },
+  imgBox: {
+    width: 208,
+    height: 100,
+    marginTop: 5,
+    borderColor: '#419ED7',
+    borderWidth: 2,
+  },
+  image: {
+    width: 208,
+    height: 100,    
+  },
   buttonContainer: {
     width: '100%',
     display: 'flex',
@@ -183,6 +194,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
   },
+  loading: {
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    title: {
+      fontSize: 25,
+      color: '#3F92C5',
+      paddingBottom: 30,
+    }
+  }
 });
 
 export {styles};

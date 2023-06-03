@@ -83,6 +83,11 @@ const Home = ({navigation}) => {
           />
         </View>
       </View>
+      {filteredVaccineList.length === 0 && !loading && (
+        <View style={styles.noVaccines}>
+          <Text style={styles.loading.title}>Nenhuma vacina cadastrada.</Text>
+        </View>
+      )}
       {loading ? (
         <View style={styles.loading}>
           <Text style={styles.loading.title}>Carregando vacinas...</Text>

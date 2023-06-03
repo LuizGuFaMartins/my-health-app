@@ -134,8 +134,8 @@ const styles = StyleSheet.create({
     borderWidth: 2,
   },
   image: {
-    width: '100%',
-    maxHeight: 100,
+    width: 208,
+    height: 100,    
   },
   radioBox: {
     width: 150,
@@ -156,6 +156,16 @@ const styles = StyleSheet.create({
     color: 'red',
     zIndex: 99,
   },
+  loading: {
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    title: {
+      fontSize: 25,
+      color: '#3F92C5',
+    }
+  }
 });
 
 export {styles};

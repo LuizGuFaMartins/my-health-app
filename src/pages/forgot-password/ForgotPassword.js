@@ -1,7 +1,6 @@
 import { sendPasswordResetEmail } from 'firebase/auth';
 import React from 'react';
-import { Button, Image, Text, View } from 'react-native';
-import { TextInput } from 'react-native-paper';
+import { Button, TextInput, Image, Text, View } from 'react-native';
 import { auth } from '../../firebase/config';
 import { styles } from './ForgotPassword_sty';
 
@@ -22,7 +21,6 @@ const ForgotPassword = ({navigation}) => {
 
   function validateFields() {
     onChangeEmailError('');
-    onChangePasswordError('');
     let isValid = true;
     const emailRegex =
       /([-!#-'*+/-9=?A-Z^-~]+(\.[-!#-'*+/-9=?A-Z^-~]+)*|"([]!#-[^-~ \t]|(\\[\t -~]))+")@([0-9A-Za-z]([0-9A-Za-z-]{0,61}[0-9A-Za-z])?(\.[0-9A-Za-z]([0-9A-Za-z-]{0,61}[0-9A-Za-z])?)*|\[((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])(\.(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])){3}|IPv6:((((0|[1-9A-Fa-f][0-9A-Fa-f]{0,3}):){6}|::((0|[1-9A-Fa-f][0-9A-Fa-f]{0,3}):){5}|[0-9A-Fa-f]{0,4}::((0|[1-9A-Fa-f][0-9A-Fa-f]{0,3}):){4}|(((0|[1-9A-Fa-f][0-9A-Fa-f]{0,3}):)?(0|[1-9A-Fa-f][0-9A-Fa-f]{0,3}))?::((0|[1-9A-Fa-f][0-9A-Fa-f]{0,3}):){3}|(((0|[1-9A-Fa-f][0-9A-Fa-f]{0,3}):){0,2}(0|[1-9A-Fa-f][0-9A-Fa-f]{0,3}))?::((0|[1-9A-Fa-f][0-9A-Fa-f]{0,3}):){2}|(((0|[1-9A-Fa-f][0-9A-Fa-f]{0,3}):){0,3}(0|[1-9A-Fa-f][0-9A-Fa-f]{0,3}))?::(0|[1-9A-Fa-f][0-9A-Fa-f]{0,3}):|(((0|[1-9A-Fa-f][0-9A-Fa-f]{0,3}):){0,4}(0|[1-9A-Fa-f][0-9A-Fa-f]{0,3}))?::)((0|[1-9A-Fa-f][0-9A-Fa-f]{0,3}):(0|[1-9A-Fa-f][0-9A-Fa-f]{0,3})|(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])(\.(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])){3})|(((0|[1-9A-Fa-f][0-9A-Fa-f]{0,3}):){0,5}(0|[1-9A-Fa-f][0-9A-Fa-f]{0,3}))?::(0|[1-9A-Fa-f][0-9A-Fa-f]{0,3})|(((0|[1-9A-Fa-f][0-9A-Fa-f]{0,3}):){0,6}(0|[1-9A-Fa-f][0-9A-Fa-f]{0,3}))?::)|(?!IPv6:)[0-9A-Za-z-]*[0-9A-Za-z]:[!-Z^-~]+)])/g;
@@ -30,12 +28,7 @@ const ForgotPassword = ({navigation}) => {
     if (!email.match(emailRegex)) {
       onChangeEmailError('E-mail inválido');
       error = false;
-    }
-
-    if (!password) {
-      onChangePasswordError('Senha inválida');
-      error = false;
-    }
+    }    
 
     return isValid;
   }
@@ -50,6 +43,7 @@ const ForgotPassword = ({navigation}) => {
         <Text style={styles.titleHeader}>MyHealth</Text>
       </View>
 
+    
       <View styles={styles.inputContainer}>
         <View style={styles.inputSection}>
           <View style={styles.labelBox}>
