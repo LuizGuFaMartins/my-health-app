@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
     height: '100%',
     overflow: 'scroll',
     position: 'relative',  
-    paddingVertical: 15 
+    padding: 15 
   },
   titleContainer: {
     display: 'flex',

@@ -1,34 +1,38 @@
 import {useIsFocused} from '@react-navigation/native';
+import {collection, onSnapshot, query} from 'firebase/firestore';
 import React, {useEffect} from 'react';
 import {Button, View} from 'react-native';
-import {ScrollView} from 'react-native-gesture-handler';
+import {FlatList} from 'react-native-gesture-handler';
 import SimpleCard from '../../components/simple-card /SimpleCard';
-import Vaccine from '../../models/Vaccine';
+import {db} from '../../firebase/config';
+
 import {styles} from './NextVaccine_sty';
 
 const NextVaccine = ({navigation}) => {
-  const [id, setId] = React.useState(0);
   const [vaccineList, setVaccineList] = React.useState([]);
   const isFocused = useIsFocused();
 
   useEffect(() => {
-    if (id !== 0) goToEditPage();
-  }, [id]);
+    const q = query(collection(db, 'vaccines'));
 
-  useEffect(() => {
-    let vaccines = Vaccine.list();
-    setVaccineList(vaccines);
+    onSnapshot(q, snapshot => {
+      const vaccinesList = [];
+
+      snapshot.forEach(vac => {
+        vaccinesList.push({
+          id: vac.id,
+          date: vac.data().date,
+          vaccine: vac.data().vaccine,
+          dose: vac.data().dose,
+          uploadUrl: vac.data().uploadUrl,
+          nextDate: vac.data().nextDate,
+          userId: vac.data().userId,
+        });
+      });
+
+      setVaccineList(vaccinesList);
+    });
   }, [isFocused]);
-
-  function loadCards() {
-    return vaccineList.map(vac => (
-      <SimpleCard vaccine={vac} setId={setId}></SimpleCard>
-    ));
-  }
-
-  function goToEditPage() {
-    navigation.push('Editar vacina', {id: id});
-  }
 
   function goToCreatePage() {
     navigation.navigate('Nova vacina', {});
@@ -36,9 +40,16 @@ const NextVaccine = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <ScrollView>
-        <View style={styles.cardsContainer}>{loadCards()}</View>
-      </ScrollView>
+      <View>
+        <FlatList
+          data={vaccineList}
+          renderItem={vac => (
+            <SimpleCard vaccine={vac} navigation={navigation}></SimpleCard>
+          )}
+          keyExtractor={vac => vac.id}
+          numColumns={1}></FlatList>
+      </View>
+
       <View style={styles.footerButton}>
         <View style={styles.buttonBox}>
           <Button

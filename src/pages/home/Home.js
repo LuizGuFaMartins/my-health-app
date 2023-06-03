@@ -1,22 +1,19 @@
-import {useIsFocused} from '@react-navigation/native';
-import {collection, onSnapshot, query} from 'firebase/firestore';
-import React, {useEffect} from 'react';
-import {Button, Image, View} from 'react-native';
-import {FlatList, ScrollView, TextInput} from 'react-native-gesture-handler';
+import { useIsFocused } from '@react-navigation/native';
+import { collection, onSnapshot, query } from 'firebase/firestore';
+import React, { useEffect } from 'react';
+import { Button, Image, View } from 'react-native';
+import { FlatList, TextInput } from 'react-native-gesture-handler';
 import Card from '../../components/card/Card';
-import {db} from '../../firebase/config';
+import { db } from '../../firebase/config';
 import Vaccine from '../../models/Vaccine';
-import {styles} from './Home_sty';
+import { styles } from './Home_sty';
 
 const Home = ({navigation}) => {
   const [search, onChangeSearch] = React.useState('');
-  const [id, setId] = React.useState(0);
   const [vaccineList, setVaccineList] = React.useState([]);
   const isFocused = useIsFocused();
 
   useEffect(() => {
-    // vaccines = Vaccine.list();
-
     const q = query(collection(db, 'vaccines'));
 
     onSnapshot(q, snapshot => {
@@ -39,10 +36,6 @@ const Home = ({navigation}) => {
   }, [isFocused]);
 
   useEffect(() => {
-    if (id !== 0) goToEditPage();
-  }, [id]);
-
-  useEffect(() => {
     if (search) {
       const filteredVaccines = vaccineList.filter(vac =>
         vac.vaccine.toUpperCase().includes(search.toUpperCase()),
@@ -52,14 +45,6 @@ const Home = ({navigation}) => {
       setVaccineList(Vaccine.list());
     }
   }, [search]);
-
-  function loadCards() {
-    return vaccineList.map(vac => <Card vaccine={vac} setId={setId}></Card>);
-  }
-
-  function goToEditPage() {
-    navigation.push('Editar vacina', {id: id});
-  }
 
   function goToCreatePage() {
     navigation.push('Nova vacina', {});
