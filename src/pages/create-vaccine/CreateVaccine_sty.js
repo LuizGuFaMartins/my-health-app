@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     position: 'relative',
     display: 'flex',
     paddingTop: 30,
-    paddingBottom: 100
+    paddingBottom: 100,
   },
   header: {
     position: 'absolute',
@@ -130,7 +130,10 @@ const styles = StyleSheet.create({
     width: 208,
     height: 100,
     marginTop: 5,
-    backgroundColor: 'gray',
+  },
+  image: {
+    width: '100%',
+    maxHeight: 100,
   },
   radioBox: {
     width: 150,

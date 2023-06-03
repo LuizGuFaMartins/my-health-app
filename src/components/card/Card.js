@@ -1,27 +1,27 @@
 import React from 'react';
-import { Image, Text, View } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import { styles } from './Card_sty';
+import {Image, Text, View} from 'react-native';
+import {TouchableOpacity} from 'react-native-gesture-handler';
+import {styles} from './Card_sty';
 
-const Card = ({vaccine, setId}) => {
-  function returnData() {
-    setId(vaccine.id);
+const Card = ({vaccine, navigation}) => {
+  function goToEditPage() {
+    navigation.push('Editar vacina', {id: vaccine.item.id});
   }
-
-  vaccine.uploadUrl = require('../../assets/images/doc.jpg');
+  
+  vaccine.item.uploadUrl = require('../../assets/images/doc.jpg');
 
   return (
     <View style={styles.card}>
-      <TouchableOpacity onPress={returnData}>
+      <TouchableOpacity onPress={goToEditPage}>
         <View style={styles.titleDate}>
-          <Text style={styles.titleDate.title}>{vaccine.vaccine}</Text>
-          <Text style={styles.titleDate.dose}>{vaccine.dose}</Text>
-          <Text style={styles.titleDate.date}>{vaccine.date}</Text>
+          <Text style={styles.titleDate.title}>{vaccine.item.vaccine}</Text>
+          <Text style={styles.titleDate.dose}>{vaccine.item.dose}</Text>
+          <Text style={styles.titleDate.date}>{vaccine.item.date}</Text>
         </View>
         <View style={styles.imageCardBox}>
-          <Image style={styles.image} source={vaccine.uploadUrl} />
+          <Image style={styles.image} source={vaccine.item.uploadUrl} />
         </View>
-        <Text style={styles.nextText}>{vaccine.nextDate}</Text>
+        <Text style={styles.nextText}>{vaccine.item.nextDate}</Text>
       </TouchableOpacity>
     </View>
   );

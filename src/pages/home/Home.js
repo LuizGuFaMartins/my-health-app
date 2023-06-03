@@ -1,8 +1,10 @@
 import {useIsFocused} from '@react-navigation/native';
+import {collection, onSnapshot, query} from 'firebase/firestore';
 import React, {useEffect} from 'react';
 import {Button, Image, View} from 'react-native';
-import {ScrollView, TextInput} from 'react-native-gesture-handler';
+import {FlatList, ScrollView, TextInput} from 'react-native-gesture-handler';
 import Card from '../../components/card/Card';
+import {db} from '../../firebase/config';
 import Vaccine from '../../models/Vaccine';
 import {styles} from './Home_sty';
 
@@ -13,8 +15,27 @@ const Home = ({navigation}) => {
   const isFocused = useIsFocused();
 
   useEffect(() => {
-    vaccines = Vaccine.list();
-    setVaccineList(vaccines);
+    // vaccines = Vaccine.list();
+
+    const q = query(collection(db, 'vaccines'));
+
+    onSnapshot(q, snapshot => {
+      const vaccinesList = [];
+
+      snapshot.forEach(vac => {
+        vaccinesList.push({
+          id: vac.id,
+          date: vac.data().date,
+          vaccine: vac.data().vaccine,
+          dose: vac.data().dose,
+          uploadUrl: vac.data().uploadUrl,
+          nextDate: vac.data().nextDate,
+          userId: vac.data().userId,
+        });
+      });
+
+      setVaccineList(vaccinesList);
+    });
   }, [isFocused]);
 
   useEffect(() => {
@@ -63,9 +84,15 @@ const Home = ({navigation}) => {
           />
         </View>
       </View>
-      <ScrollView>
-        <View style={styles.cardsContainer}>{loadCards()}</View>
-      </ScrollView>
+      <View style={styles.cardsContainer}>
+        <FlatList
+          data={vaccineList}
+          renderItem={vac => (
+            <Card vaccine={vac} navigation={navigation}></Card>
+          )}
+          keyExtractor={vac => vac.id}
+          numColumns={2}></FlatList>
+      </View>
       <View style={styles.footerButton}>
         <View style={styles.buttonBox}>
           <Button

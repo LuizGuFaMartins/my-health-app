@@ -1,4 +1,4 @@
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import {signInWithEmailAndPassword} from 'firebase/auth';
 import React from 'react';
 import {
   Button,
@@ -9,16 +9,15 @@ import {
   View,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import { auth } from '../../firebase/config.js';
-import Users from '../../models/Users';
-import { styles } from './Login_sty';
+import {auth} from '../../firebase/config.js';
+import {styles} from './Login_sty';
 
 const Login = ({navigation}) => {
   const emailRegex =
     /([-!#-'*+/-9=?A-Z^-~]+(\.[-!#-'*+/-9=?A-Z^-~]+)*|"([]!#-[^-~ \t]|(\\[\t -~]))+")@([0-9A-Za-z]([0-9A-Za-z-]{0,61}[0-9A-Za-z])?(\.[0-9A-Za-z]([0-9A-Za-z-]{0,61}[0-9A-Za-z])?)*|\[((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])(\.(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])){3}|IPv6:((((0|[1-9A-Fa-f][0-9A-Fa-f]{0,3}):){6}|::((0|[1-9A-Fa-f][0-9A-Fa-f]{0,3}):){5}|[0-9A-Fa-f]{0,4}::((0|[1-9A-Fa-f][0-9A-Fa-f]{0,3}):){4}|(((0|[1-9A-Fa-f][0-9A-Fa-f]{0,3}):)?(0|[1-9A-Fa-f][0-9A-Fa-f]{0,3}))?::((0|[1-9A-Fa-f][0-9A-Fa-f]{0,3}):){3}|(((0|[1-9A-Fa-f][0-9A-Fa-f]{0,3}):){0,2}(0|[1-9A-Fa-f][0-9A-Fa-f]{0,3}))?::((0|[1-9A-Fa-f][0-9A-Fa-f]{0,3}):){2}|(((0|[1-9A-Fa-f][0-9A-Fa-f]{0,3}):){0,3}(0|[1-9A-Fa-f][0-9A-Fa-f]{0,3}))?::(0|[1-9A-Fa-f][0-9A-Fa-f]{0,3}):|(((0|[1-9A-Fa-f][0-9A-Fa-f]{0,3}):){0,4}(0|[1-9A-Fa-f][0-9A-Fa-f]{0,3}))?::)((0|[1-9A-Fa-f][0-9A-Fa-f]{0,3}):(0|[1-9A-Fa-f][0-9A-Fa-f]{0,3})|(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])(\.(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])){3})|(((0|[1-9A-Fa-f][0-9A-Fa-f]{0,3}):){0,5}(0|[1-9A-Fa-f][0-9A-Fa-f]{0,3}))?::(0|[1-9A-Fa-f][0-9A-Fa-f]{0,3})|(((0|[1-9A-Fa-f][0-9A-Fa-f]{0,3}):){0,6}(0|[1-9A-Fa-f][0-9A-Fa-f]{0,3}))?::)|(?!IPv6:)[0-9A-Za-z-]*[0-9A-Za-z]:[!-Z^-~]+)])/g;
 
-  const [email, onChangeEmail] = React.useState('');
-  const [password, onChangePassword] = React.useState('');
+  const [email, onChangeEmail] = React.useState('email@gmail.com');
+  const [password, onChangePassword] = React.useState('123456789');
 
   const [emailError, onChangeEmailError] = React.useState('');
   const [passwordError, onChangePasswordError] = React.useState('');
@@ -44,25 +43,26 @@ const Login = ({navigation}) => {
   function validateFields() {
     onChangeEmailError('');
     onChangePasswordError('');
+    let isValid = true;
 
-    const user = Users.getElementByEmail(email);
-    let userEmail, userPassword;
-    if (user) {
-      userEmail = user.email;
-      userPassword = user.password;
-    }
+    // const user = Users.getElementByEmail(email);
+    // let userEmail, userPassword;
+    // if (user) {
+    //   userEmail = user.email;
+    //   userPassword = user.password;
+    // }
 
-    if (!email.match(emailRegex) || email !== userEmail) {
+    if (!email.match(emailRegex)) {
       onChangeEmailError('E-mail inválido');
-      return false;
+      isValid = false;
     }
 
-    if (!password || password !== userPassword) {
+    if (!password) {
       onChangePasswordError('Senha inválida');
-      return false;
+      isValid = false;
     }
 
-    return true;
+    return isValid;
   }
 
   return (

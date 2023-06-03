@@ -1,25 +1,28 @@
 import {faCalendar} from '@fortawesome/free-regular-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {addDoc, collection} from 'firebase/firestore';
+import {getDownloadURL, ref, uploadBytes} from 'firebase/storage';
 import moment from 'moment';
 import React from 'react';
-import {Button, Text, TouchableOpacity, View} from 'react-native';
+import {Button, Image, Text, TouchableOpacity, View} from 'react-native';
 import DatePicker from 'react-native-date-picker';
 import {ScrollView, TextInput} from 'react-native-gesture-handler';
+import {launchCamera} from 'react-native-image-picker';
 import {Provider, RadioButton} from 'react-native-paper';
+import {auth, db, storage} from '../../firebase/config';
 import {styles} from './CreateVaccine_sty';
-import Vaccine from '../../models/Vaccine';
-import {addDoc, collection} from 'firebase/firestore';
-import {db, storage} from '../../firebase/config';
 
 const CreateVaccine = ({navigation}) => {
   const [vaccineDate, onChangeVaccineDate] = React.useState(new Date());
   const [vaccineNextDate, onChangeVaccineNextDate] = React.useState(new Date());
   const [openDate, onChangeOpenDate] = React.useState(false);
   const [openNext, onChangeOpenNext] = React.useState(false);
+  const [user, setUser] = React.useState();
 
   const [date, onChangeDate] = React.useState('');
   const [vaccine, onChangeVaccine] = React.useState('');
   const [dose, onChangeDose] = React.useState('');
+  const [upload, onChangeUpload] = React.useState();
   const [uploadUrl, onChangeUploadUrl] = React.useState('');
   const [nextDate, onChangeNextDate] = React.useState('');
 
@@ -29,30 +32,57 @@ const CreateVaccine = ({navigation}) => {
   const [uploadError, onChangeUploadError] = React.useState('');
   const [nextError, onChangeNextError] = React.useState('');
 
-  function createVaccine() {
+  async function createVaccine() {
     if (validateFields()) {
-      const data = {
-        date,
-        vaccine,
-        dose,
-        uploadUrl,
-        nextDate,
-      };
-      Vaccine.new(data);
-      navigation.navigate('Home', {});
+      const collectio = collection(db, 'vaccines');
+      const imageRef = ref(storage, `ìmages/${upload.fileName}`);
+
+      const file = await fetch(uploadUrl);
+      const blob = await file.blob();
+
+      uploadBytes(imageRef, blob, {contentType: 'image/jpeg'})
+        .then(result => {
+          console.log('Arquivo foi enviado com sucesso.');
+          getDownloadURL(imageRef).then(url => {
+            const vac = {
+              date,
+              vaccine,
+              dose,
+              uploadUrl: url,
+              nextDate,
+              user_id: auth.currentUser.uid,
+            };
+
+            console.log('vacina: ', vac);
+
+            addDoc(collectio, vac)
+              .then(refDoc => {
+                console.log(
+                  'Vacina inserida com sucesso: ' + JSON.stringify(refDoc),
+                );
+                navigation.navigate('Home', {});
+              })
+              .catch(error => {
+                console.log('Error: ' + JSON.stringify(error));
+              });
+          });
+        })
+        .catch(error => {
+          console.log('Erro ao enviar arquivo: ' + JSON.stringify(error));
+        });
     }
   }
 
-  // const takePicture = () => {
-  //   launchCamera({mediaType: 'photo', cameraType: 'back', quality: 1})
-  //     .then(result => {
-  //       setFoto(result.assets[0]);
-  //       setUrlFoto(result.assets[0].uri);
-  //     })
-  //     .catch(error => {
-  //       console.log('Error ao capturar imagem: ' + JSON.stringify(error));
-  //     });
-  // };
+  const takePicture = () => {
+    launchCamera({mediaType: 'photo', cameraType: 'back', quality: 1})
+      .then(result => {
+        onChangeUpload(result.assets[0]);
+        onChangeUploadUrl(result.assets[0].uri);
+      })
+      .catch(error => {
+        console.log('Error ao capturar imagem: ' + JSON.stringify(error));
+      });
+  };
 
   const theme = {
     colors: {
@@ -84,10 +114,10 @@ const CreateVaccine = ({navigation}) => {
       isValid = false;
     }
 
-    // if (!uploadUrl) {
-    //   onChangeUploadError('Upload inválido');
-    //   isValid = false;
-    // }
+    if (!uploadUrl) {
+      onChangeUploadError('Upload inválido');
+      isValid = false;
+    }
 
     if (!nextDate) {
       onChangeNextError('Data inválida');
@@ -211,12 +241,16 @@ const CreateVaccine = ({navigation}) => {
             </View>
             <View style={styles.inputBoxUpload}>
               <Button
-                onPress={createVaccine}
+                onPress={takePicture}
                 title="Selecionar Imagem..."
                 color="#419ED7"
                 accessibilityLabel="Learn more about this purple button"
               />
-              <View style={styles.imgBox}></View>
+              <View style={styles.imgBox}>
+                {upload !== undefined && (
+                  <Image style={styles.image} source={upload} />
+                )}
+              </View>
             </View>
             {uploadError.length > 0 && (
               <Text style={styles.error}>{uploadError}</Text>

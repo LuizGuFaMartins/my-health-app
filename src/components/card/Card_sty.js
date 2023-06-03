@@ -2,12 +2,12 @@ import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
   card: {
-    width: '48%',
+    width: '47%',
     height: 180,
     backgroundColor: 'white',
     borderRadius: 15,
     padding: 10,
-    marginBottom: 15,
+    margin: 5,
   },
   titleDate: {
     display: 'flex',

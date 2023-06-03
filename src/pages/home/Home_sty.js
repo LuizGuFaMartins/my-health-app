@@ -51,14 +51,14 @@ const styles = StyleSheet.create({
   },
   cardsContainer: {
     width: '100%',
-    paddingHorizontal: 14,
+    paddingHorizontal: 10,
     display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'flex-start',
+    justifyContent: 'center',
+    alignItems: 'center',
     flexDirection: 'row',
     flexWrap: 'wrap',
     position: 'relative',
-    paddingBottom: 60,
+    paddingBottom: 60,    
   },  
   footerButton: {
     width: '100%',
