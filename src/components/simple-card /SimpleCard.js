@@ -5,7 +5,7 @@ import {styles} from './SimpleCard_sty';
 
 const SimpleCard = ({vaccine, navigation}) => {
   function goToEditPage() {
-    navigation.push('Editar vacina', {id: vaccine.item.id});
+    navigation.push('Editar vacina', {vaccine: vaccine.item});
   }
   return (
     <View key={vaccine.item.id} style={styles.simpleCard}>

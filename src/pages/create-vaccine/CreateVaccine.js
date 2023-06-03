@@ -44,23 +44,19 @@ const CreateVaccine = ({navigation}) => {
         .then(result => {
           console.log('Arquivo foi enviado com sucesso.');
           getDownloadURL(imageRef).then(url => {
-            const vac = {
+            addDoc(collectio, {
               date,
               vaccine,
               dose,
               uploadUrl: url,
               nextDate,
               user_id: auth.currentUser.uid,
-            };
-
-            console.log('vacina: ', vac);
-
-            addDoc(collectio, vac)
+            })
               .then(refDoc => {
                 console.log(
                   'Vacina inserida com sucesso: ' + JSON.stringify(refDoc),
                 );
-                navigation.navigate('Home', {});
+                props.navigation.pop();
               })
               .catch(error => {
                 console.log('Error: ' + JSON.stringify(error));

@@ -130,6 +130,8 @@ const styles = StyleSheet.create({
     width: 208,
     height: 100,
     marginTop: 5,
+    borderColor: '#419ED7',
+    borderWidth: 2,
   },
   image: {
     width: '100%',

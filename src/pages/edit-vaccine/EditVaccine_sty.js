@@ -131,7 +131,8 @@ const styles = StyleSheet.create({
     width: 208,
     height: 100,
     marginTop: 5,
-    backgroundColor: 'gray',
+    borderColor: '#419ED7',
+    borderWidth: 2,
   },
   radioBox: {
     width: 150,
@@ -168,11 +169,11 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     alignItems: 'center',
     borderColor: '#B9DFDB',
-    borderWidth: 5
+    borderWidth: 5,
   },
   modalTitle: {
     color: '#FD7979',
-    fontSize: 25, 
+    fontSize: 25,
     textAlign: 'center',
     padding: 10,
   },
@@ -180,8 +181,8 @@ const styles = StyleSheet.create({
     display: 'flex',
     justifyContent: 'space-around',
     alignItems: 'center',
-    flexDirection: 'row'
-  }
+    flexDirection: 'row',
+  },
 });
 
 export {styles};

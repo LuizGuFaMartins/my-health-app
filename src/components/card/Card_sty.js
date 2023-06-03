@@ -30,6 +30,7 @@ const styles = StyleSheet.create({
     },
   },
   imageCardBox: {
+    width: '100%',
     height: 80,
     marginVertical: 8,
     display: 'flex',
@@ -38,7 +39,7 @@ const styles = StyleSheet.create({
   },
   image: {
     maxWidth: '100%',
-    maxHeight: 80,
+    height: 80,
   },
   nextText: {
     color: '#FD7979',
