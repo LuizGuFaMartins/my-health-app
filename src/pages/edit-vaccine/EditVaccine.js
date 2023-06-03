@@ -9,7 +9,7 @@ import {Modal, Portal, Provider, RadioButton} from 'react-native-paper';
 import Vaccine from '../../models/Vaccine';
 import {styles} from './EditVaccine_sty';
 import Users from '../../models/Users';
-import {doc, updateDoc} from 'firebase/firestore';
+import {deleteDoc, doc, updateDoc} from 'firebase/firestore';
 import {auth, db, storage} from '../../firebase/config';
 import {launchCamera} from 'react-native-image-picker';
 import {getDownloadURL, ref, uploadBytes} from 'firebase/storage';
@@ -108,7 +108,7 @@ const EditVaccine = ({navigation, route}) => {
     deleteDoc(refVaccine)
       .then(() => {
         console.log('Documento excluído com sucesso!!!');
-        props.navigation.pop();
+        navigation.navigate('Home', {});
       })
       .catch(error => {
         console.log('Erro ao excluir o documento: ' + error);

@@ -56,7 +56,7 @@ const CreateVaccine = ({navigation}) => {
                 console.log(
                   'Vacina inserida com sucesso: ' + JSON.stringify(refDoc),
                 );
-                props.navigation.pop();
+                navigation.navigate('Home', {});
               })
               .catch(error => {
                 console.log('Error: ' + JSON.stringify(error));
