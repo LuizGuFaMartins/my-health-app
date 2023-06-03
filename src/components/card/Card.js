@@ -2,9 +2,24 @@ import React from 'react';
 import {Image, Text, View} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {styles} from './Card_sty';
+import {useDispatch} from 'react-redux';
+import {reducerSetVaccine} from '../../redux/vaccines/vaccineSlice';
 
 const Card = ({vaccine, navigation}) => {
+  const dispatch = useDispatch();
+
   function goToEditPage() {
+    dispatch(
+      reducerSetVaccine({
+        id: vaccine.item.id,
+        date: vaccine.item.date,
+        vaccine: vaccine.item.vaccine,
+        dose: vaccine.item.dose,
+        uploadUrl: vaccine.item.uploadUrl,
+        nextDate: vaccine.item.nextDate,
+        userId: vaccine.item.userId,
+      }),
+    );
     navigation.push('Editar vacina', {vaccine: vaccine.item});
   }
   return (

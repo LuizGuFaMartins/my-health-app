@@ -253,6 +253,7 @@ const CreateAccount = ({navigation}) => {
                 style={styles.input}
                 onChangeText={onChangePassword}
                 value={password}
+                secureTextEntry={true}
                 placeholder="Digite sua senha"
                 placeholderTextColor="#419ED7"
               />
@@ -272,6 +273,7 @@ const CreateAccount = ({navigation}) => {
                 style={styles.input}
                 onChangeText={onChangeConfirmPassword}
                 value={confirmPassword}
+                secureTextEntry={true}
                 placeholder="Digite novamente sua senha"
                 placeholderTextColor="#419ED7"
               />

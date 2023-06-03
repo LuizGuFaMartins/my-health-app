@@ -31,7 +31,7 @@ const Login = ({navigation}) => {
       signInWithEmailAndPassword(auth, email, password)
         .then(user => {
           findUserById(user.user.uid);
-          navigation.navigate('Main', {});
+          navigation.navigate('Main');
         })
         .catch(error => console.log(JSON.stringify(error)));
     }

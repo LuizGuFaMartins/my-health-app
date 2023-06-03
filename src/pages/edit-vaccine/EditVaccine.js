@@ -13,9 +13,10 @@ import {deleteDoc, doc, updateDoc} from 'firebase/firestore';
 import {auth, db, storage} from '../../firebase/config';
 import {launchCamera} from 'react-native-image-picker';
 import {getDownloadURL, ref, uploadBytes} from 'firebase/storage';
+import {useSelector} from 'react-redux';
 
 const EditVaccine = ({navigation, route}) => {
-  const params = route.params.vaccine;
+  const stateVaccine = useSelector(state => state.vaccine);
   const [visible, setVisible] = React.useState(false);
   const [vaccineDate, onChangeVaccineDate] = React.useState(new Date());
   const [vaccineNextDate, onChangeVaccineNextDate] = React.useState(new Date());
@@ -46,19 +47,19 @@ const EditVaccine = ({navigation, route}) => {
   const hideModal = () => setVisible(false);
 
   useEffect(() => {
-    if (params) {
-      onChangeDate(params.date);
-      onChangeVaccine(params.vaccine);
-      onChangeDose(params.dose);
-      onChangeUploadUrl(params.uploadUrl);
-      onChangeNextDate(params.nextDate);
+    if (stateVaccine) {
+      onChangeDate(stateVaccine.date);
+      onChangeVaccine(stateVaccine.vaccine);
+      onChangeDose(stateVaccine.dose);
+      onChangeUploadUrl(stateVaccine.uploadUrl);
+      onChangeNextDate(stateVaccine.nextDate);
     }
-  }, []);
+  }, [stateVaccine]);
 
   async function updateVaccine() {
     if (validateFields()) {
       const imageRef = ref(storage, `ìmages/${upload.fileName}`);
-      const refVaccine = doc(db, 'vaccines', params.id);
+      const refVaccine = doc(db, 'vaccines', stateVaccine.id);
 
       const file = await fetch(uploadUrl);
       const blob = await file.blob();
@@ -104,7 +105,7 @@ const EditVaccine = ({navigation, route}) => {
   };
 
   function deleteVaccine() {
-    const refVaccine = doc(db, 'vaccines', params.id);
+    const refVaccine = doc(db, 'vaccines', stateVaccine.id);
     deleteDoc(refVaccine)
       .then(() => {
         console.log('Documento excluído com sucesso!!!');

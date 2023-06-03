@@ -74,7 +74,16 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginVertical: 20,
   },
-
+  loading: {
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    title: {
+      fontSize: 25,
+      color: '#3F92C5',
+    }
+  }
 });
 
 export {styles};

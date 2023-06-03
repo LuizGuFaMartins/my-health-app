@@ -5,8 +5,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#ADD4D0',
     height: '100%',
     overflow: 'scroll',
-    position: 'relative',  
-    padding: 15 
+    position: 'relative',
+    padding: 15,
   },
   titleContainer: {
     display: 'flex',
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     position: 'relative',
     paddingBottom: 60,
-  },  
+  },
   footerButton: {
     width: '100%',
     backgroundColor: '#ADD4D0',
@@ -74,7 +74,16 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginVertical: 20,
   },
-
+  loading: {
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    title: {
+      fontSize: 25,
+      color: '#3F92C5',
+    },
+  },
 });
 
 export {styles};
