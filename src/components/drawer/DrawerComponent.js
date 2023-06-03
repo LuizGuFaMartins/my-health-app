@@ -1,8 +1,11 @@
 import React from 'react';
-import { Image, Text, TouchableOpacity, View } from 'react-native';
-import { styles } from './DrawerComponent_sty';
+import {Image, Text, TouchableOpacity, View} from 'react-native';
+import {styles} from './DrawerComponent_sty';
+import {useSelector} from 'react-redux';
 
 const DrawerComponent = props => {
+  const userName = useSelector(state => state.user.name);
+
   function goToMyVaccines() {
     props.navigation.navigate('Home');
   }
@@ -18,7 +21,7 @@ const DrawerComponent = props => {
   return (
     <View style={styles.container}>
       <View style={styles.title}>
-        <Text style={styles.username}>Olá usuário</Text>
+        <Text style={styles.username}>Olá {userName}</Text>
       </View>
       <View style={styles.routesList}>
         <TouchableOpacity style={styles.routeItem} onPress={goToMyVaccines}>

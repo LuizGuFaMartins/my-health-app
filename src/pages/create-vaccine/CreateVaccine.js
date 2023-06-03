@@ -50,7 +50,7 @@ const CreateVaccine = ({navigation}) => {
               dose,
               uploadUrl: url,
               nextDate,
-              user_id: auth.currentUser.uid,
+              userId: auth.currentUser.uid,
             })
               .then(refDoc => {
                 console.log(

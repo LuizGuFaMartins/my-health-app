@@ -27,10 +27,10 @@ const Home = ({navigation}) => {
           dose: vac.data().dose,
           uploadUrl: vac.data().uploadUrl,
           nextDate: vac.data().nextDate,
-          userId: vac.data().user_id,
+          userId: vac.data().userId,
         });
       });
-      
+
       setVaccineList(vaccinesList);
     });
   }, [isFocused]);

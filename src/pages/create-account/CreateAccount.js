@@ -1,6 +1,6 @@
-import { faCalendar } from '@fortawesome/free-regular-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import {faCalendar} from '@fortawesome/free-regular-svg-icons';
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {createUserWithEmailAndPassword} from 'firebase/auth';
 import moment from 'moment';
 import React from 'react';
 import {
@@ -12,24 +12,23 @@ import {
   View,
 } from 'react-native';
 import DatePicker from 'react-native-date-picker';
-import { ScrollView } from 'react-native-gesture-handler';
-import { Provider, RadioButton } from 'react-native-paper';
-import { auth } from '../../firebase/config.js';
+import {ScrollView} from 'react-native-gesture-handler';
+import {Provider, RadioButton} from 'react-native-paper';
+import {auth, db} from '../../firebase/config.js';
 import Users from '../../models/Users';
-import { styles } from './CreateAccount_sty';
+import {styles} from './CreateAccount_sty';
+import {addDoc, collection} from 'firebase/firestore';
 
 const CreateAccount = ({navigation}) => {
   const [openDate, onChangeOpenDate] = React.useState(false);
 
-  const [name, onChangeName] = React.useState('Nome');
-  const [gender, onChangeGender] = React.useState('Masculino');
-  const [birthdayDateInput, onChangeBirthdayDateInput] =
-    React.useState('07/03/2002');
+  const [name, onChangeName] = React.useState('');
+  const [gender, onChangeGender] = React.useState('');
+  const [birthdayDateInput, onChangeBirthdayDateInput] = React.useState('');
   const [birthdayDate, onChangeBirthdayDate] = React.useState(new Date());
-  const [email, onChangeEmail] = React.useState('email@gmail.com');
-  const [password, onChangePassword] = React.useState('123456789');
-  const [confirmPassword, onChangeConfirmPassword] =
-    React.useState('123456789');
+  const [email, onChangeEmail] = React.useState('');
+  const [password, onChangePassword] = React.useState('');
+  const [confirmPassword, onChangeConfirmPassword] = React.useState('');
 
   const [nameError, onChangeNameError] = React.useState('');
   const [genderError, onChangeGenderError] = React.useState('');
@@ -48,19 +47,27 @@ const CreateAccount = ({navigation}) => {
 
   function createAccount() {
     if (validateFields()) {
-      const user = {
-        name,
-        gender,
-        birthdayDate: birthdayDateInput,
-        email,
-        password,
-      };
-      Users.new(user);
+      const collectio = collection(db, 'users');
 
       createUserWithEmailAndPassword(auth, email, password)
         .then(user => {
-          console.log('Usuário criado com sucesso: ', JSON.stringify(user));
-          navigation.navigate('Login', {});
+          addDoc(collectio, {
+            userId: user.user.uid,
+            name: name,
+            gender: gender,
+            birthdayDate: birthdayDateInput,
+            email: email,
+          })
+            .then(refDoc => {
+              console.log(
+                'Usuário criado com sucesso: ',
+                JSON.stringify(refDoc),
+              );
+              navigation.navigate('Login', {});
+            })
+            .catch(error => {
+              console.log('Error: ' + JSON.stringify(error));
+            });
         })
         .catch(error => console.log(JSON.stringify(error)));
     }

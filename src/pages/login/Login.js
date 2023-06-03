@@ -9,10 +9,14 @@ import {
   View,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import {auth} from '../../firebase/config.js';
+import {auth, db} from '../../firebase/config.js';
 import {styles} from './Login_sty';
+import {useDispatch} from 'react-redux';
+import {collection, onSnapshot, query, where} from 'firebase/firestore';
+import {reducerSetUser} from '../../redux/users/userSlice.js';
 
 const Login = ({navigation}) => {
+  const dispatch = useDispatch();
   const emailRegex =
     /([-!#-'*+/-9=?A-Z^-~]+(\.[-!#-'*+/-9=?A-Z^-~]+)*|"([]!#-[^-~ \t]|(\\[\t -~]))+")@([0-9A-Za-z]([0-9A-Za-z-]{0,61}[0-9A-Za-z])?(\.[0-9A-Za-z]([0-9A-Za-z-]{0,61}[0-9A-Za-z])?)*|\[((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])(\.(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])){3}|IPv6:((((0|[1-9A-Fa-f][0-9A-Fa-f]{0,3}):){6}|::((0|[1-9A-Fa-f][0-9A-Fa-f]{0,3}):){5}|[0-9A-Fa-f]{0,4}::((0|[1-9A-Fa-f][0-9A-Fa-f]{0,3}):){4}|(((0|[1-9A-Fa-f][0-9A-Fa-f]{0,3}):)?(0|[1-9A-Fa-f][0-9A-Fa-f]{0,3}))?::((0|[1-9A-Fa-f][0-9A-Fa-f]{0,3}):){3}|(((0|[1-9A-Fa-f][0-9A-Fa-f]{0,3}):){0,2}(0|[1-9A-Fa-f][0-9A-Fa-f]{0,3}))?::((0|[1-9A-Fa-f][0-9A-Fa-f]{0,3}):){2}|(((0|[1-9A-Fa-f][0-9A-Fa-f]{0,3}):){0,3}(0|[1-9A-Fa-f][0-9A-Fa-f]{0,3}))?::(0|[1-9A-Fa-f][0-9A-Fa-f]{0,3}):|(((0|[1-9A-Fa-f][0-9A-Fa-f]{0,3}):){0,4}(0|[1-9A-Fa-f][0-9A-Fa-f]{0,3}))?::)((0|[1-9A-Fa-f][0-9A-Fa-f]{0,3}):(0|[1-9A-Fa-f][0-9A-Fa-f]{0,3})|(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])(\.(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])){3})|(((0|[1-9A-Fa-f][0-9A-Fa-f]{0,3}):){0,5}(0|[1-9A-Fa-f][0-9A-Fa-f]{0,3}))?::(0|[1-9A-Fa-f][0-9A-Fa-f]{0,3})|(((0|[1-9A-Fa-f][0-9A-Fa-f]{0,3}):){0,6}(0|[1-9A-Fa-f][0-9A-Fa-f]{0,3}))?::)|(?!IPv6:)[0-9A-Za-z-]*[0-9A-Za-z]:[!-Z^-~]+)])/g;
 
@@ -26,6 +30,7 @@ const Login = ({navigation}) => {
     if (validateFields()) {
       signInWithEmailAndPassword(auth, email, password)
         .then(user => {
+          findUserById(user.user.uid);
           navigation.navigate('Main', {});
         })
         .catch(error => console.log(JSON.stringify(error)));
@@ -45,13 +50,6 @@ const Login = ({navigation}) => {
     onChangePasswordError('');
     let isValid = true;
 
-    // const user = Users.getElementByEmail(email);
-    // let userEmail, userPassword;
-    // if (user) {
-    //   userEmail = user.email;
-    //   userPassword = user.password;
-    // }
-
     if (!email.match(emailRegex)) {
       onChangeEmailError('E-mail inválido');
       isValid = false;
@@ -63,6 +61,24 @@ const Login = ({navigation}) => {
     }
 
     return isValid;
+  }
+
+  async function findUserById(userId) {
+    const q = query(collection(db, 'users'), where('userId', '==', userId));
+
+    onSnapshot(q, snapshot => {
+      snapshot.forEach(u => {
+        dispatch(
+          reducerSetUser({
+            userId: u.data().userId,
+            name: u.data().name,
+            gender: u.data().gender,
+            birthdayDate: u.data().birthdayDate,
+            email: u.data().email,
+          }),
+        );
+      });
+    });
   }
 
   return (
