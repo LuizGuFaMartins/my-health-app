@@ -19,6 +19,7 @@ const Home = ({navigation}) => {
   useEffect(() => {
     setVaccineList([]);
     setFilteredVaccineList([]);
+    setFilteredVaccineList([]);
     if (user.userId) {
       const q = query(
         collection(db, 'vaccines'),

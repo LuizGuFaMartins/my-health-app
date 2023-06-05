@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     },
   },
   imageCardBox: {
-    width: '100%',
+    width: 150,
     height: 80,
     marginVertical: 8,
     display: 'flex',
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   image: {
-    maxWidth: '100%',
+    width: 150,
     height: 80,
   },
   nextText: {

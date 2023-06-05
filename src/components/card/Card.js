@@ -22,6 +22,9 @@ const Card = ({vaccine, navigation}) => {
     );
     navigation.push('Editar vacina', {vaccine: vaccine.item});
   }
+
+  console.log('\n\n url: ', vaccine.item.uploadUrl);
+
   return (
     <View style={styles.card}>
       <TouchableOpacity onPress={goToEditPage}>
