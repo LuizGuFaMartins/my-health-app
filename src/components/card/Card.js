@@ -1,9 +1,9 @@
 import React from 'react';
-import {Image, Text, View} from 'react-native';
-import {TouchableOpacity} from 'react-native-gesture-handler';
-import {styles} from './Card_sty';
-import {useDispatch} from 'react-redux';
-import {reducerSetVaccine} from '../../redux/vaccines/vaccineSlice';
+import { Image, Text, View } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useDispatch } from 'react-redux';
+import { reducerSetVaccine } from '../../redux/vaccines/vaccineSlice';
+import { styles } from './Card_sty';
 
 const Card = ({vaccine, navigation}) => {
   const dispatch = useDispatch();
@@ -22,8 +22,6 @@ const Card = ({vaccine, navigation}) => {
     );
     navigation.push('Editar vacina', {vaccine: vaccine.item});
   }
-
-  console.log('\n\n url: ', vaccine.item.uploadUrl);
 
   return (
     <View style={styles.card}>
